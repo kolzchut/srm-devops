@@ -2,17 +2,24 @@ apiVersion: v1
 entries:
   api:
   - apiVersion: v2
-    created: "2021-06-20T18:04:30.122211537+03:00"
+    created: "2021-06-20T17:58:31.841706765Z"
     digest: 5595ae89929f27c7d6bda94a38f1804954684f73924456a10bb1715e087dac0e
     name: api
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/api/api-v0.0.0.tgz
     version: v0.0.0
   - apiVersion: v2
-    created: "2021-06-20T18:04:30.122091224+03:00"
+    created: "2021-06-20T17:58:31.841512963Z"
     digest: f3f2dcd2e72970b6ab5243491556f0f9c37d2d49c8a75badd01ce2ac4769707a
     name: api
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/api/api-v0.0.0-test2.tgz
     version: v0.0.0-test2
-generated: "2021-06-20T18:04:30.121850168+03:00"
+  - apiVersion: v2
+    created: "2021-06-20T17:58:31.841341661Z"
+    digest: 95a7d637676825d4a86b80517e81f75fba9348b0a6a1039a20d50393d07b0126
+    name: api
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/api/api-v0.0.0-fa5a33287c07a30f086089a96abcb30e8fe1ffea.tgz
+    version: v0.0.0-fa5a33287c07a30f086089a96abcb30e8fe1ffea
+generated: "2021-06-20T17:58:31.841002857Z"
