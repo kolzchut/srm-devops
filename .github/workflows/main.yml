@@ -1,0 +1,21 @@
+name: ci
+on:
+  push:
+    branches:
+      - main
+env:
+  GITHUB_EVENT_BEFORE: ${{ github.event.before }}
+  SRM_DEVOPS_DEPLOY_KEY: ${{ secrets.SRM_DEVOPS_DEPLOY_KEY }}
+jobs:
+  main:
+    runs-on: ubuntu-18.04
+    steps:
+    - run: |
+        echo "${SRM_DEVOPS_DEPLOY_KEY}" > srm_devops_deploy_key
+        chmod 400 srm_devops_deploy_key
+        export GIT_SSH_COMMAND="ssh -i $(pwd)/srm_devops_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+        git clone git@github.com:whiletrue-industries/srm-devops.git
+        git config --global user.name "srm-devops CI" &&\
+        git config --global user.email "srm-devops-ci@localhost" &&\
+        cd srm-devops
+        bin/ci.sh main "${GITHUB_EVENT_BEFORE}" "${GITHUB_SHA}"
