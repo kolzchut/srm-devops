@@ -59,10 +59,10 @@ for ENVIRONMENT_NAME in `ls environments/`; do
         if echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_CHART_DIR}/"; then
           echo Detected change in environment chart dir
           ENVIRONMENT_CHART_HAS_CHANGES=yes
-        elif ! [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ] && echo "${GIT_DIFF}" | grep "^helm/${CHART_NAME}/latest-chart-version.txt"; then
+        elif ! [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ] && echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/latest-chart-version.txt"; then
           echo Detected change in latest chart version
           ENVIRONMENT_CHART_HAS_CHANGES=yes
-        elif echo "${GIT_DIFF}" | grep "^helm/${CHART_NAME}/values.auto-updated.yaml"; then
+        elif echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/values.auto-updated.yaml"; then
           echo Detected change in chart auto updated values
           ENVIRONMENT_CHART_HAS_CHANGES=yes
         fi
