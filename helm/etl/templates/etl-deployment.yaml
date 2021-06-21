@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.etl.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.etl.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.etl.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: api
+          image: {{ .Values.etl.image | quote }}
+          resources: {{ toYaml .Values.etl.resources | nindent 12 }}
