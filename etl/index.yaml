@@ -1,0 +1,11 @@
+apiVersion: v1
+entries:
+  etl:
+  - apiVersion: v2
+    created: "2021-06-21T15:35:51.113444242Z"
+    digest: e795947a880b91c8d55dbc62d65636e3beebd0d972b35e6fa1f523c016e242c6
+    name: etl
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/etl/etl-v0.0.0-ac27a690c7a616bc99f6aa557bdd9af8aed1d25e.tgz
+    version: v0.0.0-ac27a690c7a616bc99f6aa557bdd9af8aed1d25e
+generated: "2021-06-21T15:35:51.113015836Z"
