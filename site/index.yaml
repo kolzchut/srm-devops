@@ -1,0 +1,11 @@
+apiVersion: v1
+entries:
+  site:
+  - apiVersion: v2
+    created: "2021-06-21T08:59:58.078756057Z"
+    digest: 5a12dac11e5ea4781b812e18d166f2c22b07fc14abc9c6dabe3f63e283efefa4
+    name: site
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/site/site-v0.0.0-62843a395db1a2fc2bedba2973147d140ed2e600.tgz
+    version: v0.0.0-62843a395db1a2fc2bedba2973147d140ed2e600
+generated: "2021-06-21T08:59:58.078467853Z"
