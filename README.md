@@ -42,6 +42,8 @@ Additional files which affect the deployment of the chart:
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/values.auto-updated.yaml` - automatically updated values, overriden by the `values.yaml` file
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/chart_name.txt` - allows to deploy the same chart multiple times on the same environment
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/release_name.txt` - required only if chart_name.txt is provided - allows to specify the helm release name (otherwise uses the chart name)
+* `environments/ENVIRONMENT_NAME/environment_label.txt` - optional label for the entire environment, such as `production`, affects the following:
+    * includes an additional chart auto updated values from `helm/CHART_NAME/values.auto-updated.ENVIRONMENT_LABEL.yaml` - overrides the chart auto-updated values
 
 ### Continuous Deployment
 

@@ -28,7 +28,7 @@ for CHART_NAME in `ls helm/`; do
     if echo "${COMMIT_MSG}" | grep -- "--helm-publish-chart=${CHART_NAME}"; then
       CHART_HAS_CHANGES=yes
       echo Detected forced chart publish from commit message
-    elif echo "${GIT_DIFF}" | grep -v "^helm/${CHART_NAME}/latest-chart-version.txt" | grep -v "^helm/${CHART_NAME}/values.auto-updated.yaml" | grep "^helm/${CHART_NAME}/"; then
+    elif echo "${GIT_DIFF}" | grep -v "^helm/${CHART_NAME}/latest-chart-version.txt" | grep -v "^helm/${CHART_NAME}/values.auto-updated" | grep "^helm/${CHART_NAME}/"; then
       CHART_HAS_CHANGES=yes
       echo Detected change in chart files
     fi
@@ -62,7 +62,7 @@ for ENVIRONMENT_NAME in `ls environments/`; do
         elif ! [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ] && echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/latest-chart-version.txt"; then
           echo Detected change in latest chart version
           ENVIRONMENT_CHART_HAS_CHANGES=yes
-        elif echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/values.auto-updated.yaml"; then
+        elif echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/values.auto-updated"; then
           echo Detected change in chart auto updated values
           ENVIRONMENT_CHART_HAS_CHANGES=yes
         fi

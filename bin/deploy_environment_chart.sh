@@ -30,7 +30,18 @@ fi
 
 echo CHART_VERSION="${CHART_VERSION}"
 
+if [ -f "environments/${ENVIRONMENT_NAME}/environment_label.txt" ]; then
+  ENVIRONMENT_LABEL="$(cat "environments/${ENVIRONMENT_NAME}/environment_label.txt")"
+else
+  ENVIRONMENT_LABEL=
+fi
+
+echo ENVIRONMENT_LABEL="${ENVIRONMENT_LABEL}"
+
 [ -f "helm/${CHART_NAME}/values.auto-updated.yaml" ] && HELM_ARGS="${HELM_ARGS} -f helm/${CHART_NAME}/values.auto-updated.yaml"
+if [ "${ENVIRONMENT_LABEL}" != "" ]; then
+  [ -f "helm/${CHART_NAME}/values.auto-updated.${ENVIRONMENT_LABEL}.yaml" ] && HELM_ARGS="${HELM_ARGS} -f helm/${CHART_NAME}/values.auto-updated.${ENVIRONMENT_LABEL}.yaml"
+fi
 [ -f "${ENVIRONMENT_CHART_DIR}/values.yaml" ] && HELM_ARGS="${HELM_ARGS} -f ${ENVIRONMENT_CHART_DIR}/values.yaml"
 [ -f "${ENVIRONMENT_CHART_DIR}/values.auto-updated.yaml" ] && HELM_ARGS="${HELM_ARGS} -f ${ENVIRONMENT_CHART_DIR}/values.auto-updated.yaml"
 
