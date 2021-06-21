@@ -25,7 +25,7 @@ HELM_CHANGED_CHARTS=""
 for CHART_NAME in `ls helm/`; do
   if [ -d "helm/${CHART_NAME}" ]; then
     CHART_HAS_CHANGES=no
-    if echo "${COMMIT_MSG}" | grep "--helm-publish-chart=${CHART_NAME}"; then
+    if echo "${COMMIT_MSG}" | grep -- "--helm-publish-chart=${CHART_NAME}"; then
       CHART_HAS_CHANGES=yes
       echo Detected forced chart publish from commit message
     elif echo "${GIT_DIFF}" | grep -v "^helm/${CHART_NAME}/latest-chart-version.txt" | grep -v "^helm/${CHART_NAME}/values.auto-updated.yaml" | grep "^helm/${CHART_NAME}/"; then

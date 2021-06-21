@@ -1,4 +1,4 @@
-api:
+site:
   name: site
   image: nginx
   resources: {}
