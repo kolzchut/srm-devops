@@ -42,3 +42,11 @@ Additional files which affect the deployment of the chart:
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/values.auto-updated.yaml` - automatically updated values, overriden by the `values.yaml` file
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/chart_name.txt` - allows to deploy the same chart multiple times on the same environment
 * `environments/ENVIRONMENT_NAME/charts/CHART_NAME/release_name.txt` - required only if chart_name.txt is provided - allows to specify the helm release name (otherwise uses the chart name)
+
+### Continuous Deployment
+
+Every push to main branch runs the continous deployment script.
+This script handles the following actions:
+
+* If helm chart was changed - publish it to the helm charts repo
+* If environment chart was changed - deploy it to the relevant environment
