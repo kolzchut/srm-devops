@@ -1,0 +1,2 @@
+etl:
+  image: ghcr.io/whiletrue-industries/srm-etl:v0.0.1-8dd7a5bd559133adb4ff166907a81e763435a349
