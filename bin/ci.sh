@@ -48,4 +48,30 @@ if [ "${HELM_CHANGED_CHARTS}" != "" ]; then
   git push origin main
 fi
 
+for ENVIRONMENT_NAME in `ls environments/`; do
+  ENVIRONMENT_DIR="environments/${ENVIRONMENT_NAME}"
+  if [ -d "${ENVIRONMENT_DIR}/charts" ]; then
+    for ENVIRONMENT_CHART_NAME in `ls "${ENVIRONMENT_DIR}/charts/"`; do
+      ENVIRONMENT_CHART_DIR="${ENVIRONMENT_DIR}/charts/${ENVIRONMENT_CHART_NAME}"
+      if [ -d "${ENVIRONMENT_CHART_DIR}" ]; then
+        [ -f "${ENVIRONMENT_CHART_DIR}/chart_name.txt" ] && ENVIRONMENT_CHART_NAME="$(cat ${ENVIRONMENT_CHART_DIR}/chart_name.txt)"
+        ENVIRONMENT_CHART_HAS_CHANGES=no
+        if echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_CHART_DIR}/"; then
+          echo Detected change in environment chart dir
+          ENVIRONMENT_CHART_HAS_CHANGES=yes
+        elif ! [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ] && echo "${GIT_DIFF}" | grep "^helm/${CHART_NAME}/latest-chart-version.txt"; then
+          echo Detected change in latest chart version
+          ENVIRONMENT_CHART_HAS_CHANGES=yes
+        elif echo "${GIT_DIFF}" | grep "^helm/${CHART_NAME}/values.auto-updated.yaml"; then
+          echo Detected change in chart auto updated values
+          ENVIRONMENT_CHART_HAS_CHANGES=yes
+        fi
+        if [ "${ENVIRONMENT_CHART_HAS_CHANGES}" == "yes" ]; then
+          ! bin/deploy_environment_chart.sh "${ENVIRONMENT_CHART_DIR}" && echo Failed && RET=1
+        fi
+      fi
+    done
+  fi
+done
+
 exit $RET

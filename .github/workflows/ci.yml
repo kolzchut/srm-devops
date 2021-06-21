@@ -6,11 +6,14 @@ on:
 env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
   SRM_DEVOPS_DEPLOY_KEY: ${{ secrets.SRM_DEVOPS_DEPLOY_KEY }}
+  KUBECONFIG: ${{ secrets.KUBECONFIG }}
 jobs:
   main:
     runs-on: ubuntu-18.04
     steps:
     - run: |
+        echo "${KUBECONFIG}" > .kubeconfig
+        export KUBECONFIG="$(pwd)/.kubeconfig"
         echo "${SRM_DEVOPS_DEPLOY_KEY}" > srm_devops_deploy_key
         chmod 400 srm_devops_deploy_key
         export GIT_SSH_COMMAND="ssh -i $(pwd)/srm_devops_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
