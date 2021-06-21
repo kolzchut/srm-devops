@@ -1,0 +1,2 @@
+api:
+  image: ghcr.io/whiletrue-industries/srm-api:v0.0.1-13b7ee20fdb0020aab36b4e45f32b1df854796df
