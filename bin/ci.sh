@@ -24,13 +24,22 @@ RET=0
 HELM_CHANGED_CHARTS=""
 for CHART_NAME in `ls helm/`; do
   if [ -d "helm/${CHART_NAME}" ]; then
-    if echo "${COMMIT_MSG}" | grep "--helm-publish-chart=${CHART_NAME}" || echo "${GIT_DIFF}" | grep -v "^helm/${CHART_NAME}/latest-chart-version.txt" | grep "^helm/${CHART_NAME}/"; then
-      echo Publishing helm chart "${CHART_NAME}" with version "v0.0.0-${COMMIT_TO}" &&\
-      bin/helm_publish_chart.sh "${CHART_NAME}" "v0.0.0-${COMMIT_TO}"
-      [ "$?" != "0" ] && echo Failed && RET=1
-      echo "v0.0.0-${COMMIT_TO}" > "helm/${CHART_NAME}/latest-chart-version.txt"
-      git add "helm/${CHART_NAME}/latest-chart-version.txt"
-      HELM_CHANGED_CHARTS="${HELM_CHANGED_CHARTS} ${CHART_NAME}"
+    CHART_HAS_CHANGES=no
+    if echo "${COMMIT_MSG}" | grep "--helm-publish-chart=${CHART_NAME}"; then
+      CHART_HAS_CHANGES=yes
+      echo Detected forced chart publish from commit message
+    elif echo "${GIT_DIFF}" | grep -v "^helm/${CHART_NAME}/latest-chart-version.txt" | grep -v "^helm/${CHART_NAME}/values.auto-updated.yaml" | grep "^helm/${CHART_NAME}/"; then
+      CHART_HAS_CHANGES=yes
+      echo Detected change in chart files
+    fi
+    if [ "${CHART_HAS_CHANGES}" == "yes" ]; then
+      if bin/helm_publish_chart.sh "${CHART_NAME}" "v0.0.0-${COMMIT_TO}"; then
+        echo "v0.0.0-${COMMIT_TO}" > "helm/${CHART_NAME}/latest-chart-version.txt"
+        git add "helm/${CHART_NAME}/latest-chart-version.txt"
+        HELM_CHANGED_CHARTS="${HELM_CHANGED_CHARTS} ${CHART_NAME}"
+      else
+        echo Failed && RET=1
+      fi
     fi
   fi
 done

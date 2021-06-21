@@ -6,6 +6,8 @@ PUBLISH_VERSION="${2}"
 [ -z "${CHART_NAME}" ] && echo missing CHART_NAME && exit 1
 [ -z "${PUBLISH_VERSION}" ] && echo missing PUBLISH_VERSION && exit 1
 
+echo Publishing Helm chart "${CHART_NAME}" version "${PUBLISH_VERSION}"
+
 REPODIR="$(pwd)"
 TEMPDIR=`mktemp -d`
 cd $TEMPDIR
