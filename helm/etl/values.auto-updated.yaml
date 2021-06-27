@@ -1,2 +1,2 @@
 etl:
-  image: ghcr.io/whiletrue-industries/srm-etl:931cfc3f397ffb47838a2f6a89d93e3e3c5ff949
+  image: ghcr.io/whiletrue-industries/srm-etl:e1c7db9ee2e83d6a3fdde6dfefcc662333f1c029
