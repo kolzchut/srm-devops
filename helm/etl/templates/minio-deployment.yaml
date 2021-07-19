@@ -1,0 +1,32 @@
+{{ if not .Values.etl.S3SecretName }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.minio.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.minio.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.minio.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: minio
+          image: {{ .Values.minio.image | quote }}
+          args: ["server", "/data"]
+          resources: {{ toYaml .Values.minio.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /data
+              subPath: minio_data
+      volumes:
+        - name: data
+          emptyDir: {}
+{{ end }}

@@ -8,6 +8,8 @@ spec:
       app: {{ .Values.etl.name | quote }}
   replicas: 1
   revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
@@ -15,6 +17,50 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - name: api
+        - name: db
           image: {{ .Values.etl.image | quote }}
           resources: {{ toYaml .Values.etl.resources | nindent 12 }}
+          env:
+            - name: EXTERNAL_ADDRESS
+              value: {{ .Values.etl.EXTERNAL_ADDRESS | quote }}
+            {{- if .Values.etl.S3SecretName }}
+            - name: BUCKET_NAME
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.S3SecretName | quote }}, "key":"BUCKET_NAME"}}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.S3SecretName | quote }}, "key":"AWS_ACCESS_KEY_ID"}}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.S3SecretName | quote }}, "key":"AWS_SECRET_ACCESS_KEY"}}
+            - name: S3_ENDPOINT_URL
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.S3SecretName | quote }}, "key":"S3_ENDPOINT_URL"}}
+            - name: AWS_REGION
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.S3SecretName | quote }}, "key":"AWS_REGION"}}
+            {{- else }}
+            - name: BUCKET_NAME
+              value: "dgp-app"
+            - name: AWS_ACCESS_KEY_ID
+              value: "access_key"
+            - name: AWS_SECRET_ACCESS_KEY
+              value: "secret_key"
+            - name: S3_ENDPOINT_URL
+              value: "http://{{ .Values.minio.name }}:9000"
+            - name: AWS_REGION
+              value: "us-east-1"
+            {{- end }}
+            - name: GOOGLE_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOOGLE_KEY"}}
+            - name: GOOGLE_SECRET
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOOGLE_SECRET"}}
+            - name: PUBLIC_KEY_B64
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"PUBLIC_KEY_B64"}}
+            - name: PRIVATE_KEY_B64
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"PRIVATE_KEY_B64"}}
+            - name: SENDGRID_API_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"SENDGRID_API_KEY"}}
+            - name: DATABASE_URL
+              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/auth"
+            - name: DATASETS_DATABASE_URL
+              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/datasets"
+            - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/airflow"
+            - name: ETLS_DATABASE_URL
+              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/etls"

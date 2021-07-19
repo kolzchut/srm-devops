@@ -1,4 +1,44 @@
+# nfsServer: ""
+
+db:
+  name: db
+  image: ghcr.io/whiletrue-industries/srm-etl-db:623eb6ac56d5762b8d73acf6958946906378f429@sha256:2a448564a3d1c05f471fcb92f9489ac4cd6f8e9d77a0578265b99c4731d81603
+  resources: {}
+  # nfsPath: ""
+
+elasticsearch:
+  name: elasticsearch
+  image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3@sha256:930cdb7e960c842f89b063226bdb9374cb3a080372564b36a1c66931d4d80e09
+  resources: {}
+  # nfsPath: ""
+  # secretName: "elasticsearch"
+  ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+
+kibana:
+  name: kibana
+  image: docker.elastic.co/kibana/kibana:7.13.3@sha256:4aef97e6d0ac46eec716337bff18ba4a7b4e101680039588b5729fc3f90bf730
+  resources: {}
+
+api:
+  name: api
+  image: ghcr.io/whiletrue-industries/srm-api:latest
+  resources: {}
+  ES_INDEX_NAME: "srm"
+  ES_DATAPACKAGE: "https://next.obudget.org/datapackages/budgetkey/gov_decisions/datapackage.json"
+
+# minio is only deployed if etl.S3_ENDPOINT is not defined
+minio:
+  name: minio
+  image: minio/minio:edge@sha256:78b6513160ee72794698b808afbeff67b44b510d6d024e0728adc57d726b6c8b
+  resources: {}
+
 etl:
   name: etl
-  image: nginx
+  image: ghcr.io/whiletrue-industries/srm-etl:latest
   resources: {}
+  EXTERNAL_ADDRESS: "http://localhost:15000"
+  secretName: "etl"
+  # S3SecretName: "etl-s3"
+
+ingresses: []
+vertical_pod_autoscalers: []
