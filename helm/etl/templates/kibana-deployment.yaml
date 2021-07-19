@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.kibana.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.kibana.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.kibana.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: kibana
+          image: {{ .Values.kibana.image | quote }}
+          resources: {{ toYaml .Values.kibana.resources | nindent 12 }}
+          env:
+            - name: ELASTICSEARCH_HOSTS
+              value: "http://{{ .Values.elasticsearch.name }}:9200"
+            - name: ELASTICSEARCH_USERNAME
+              value: "elastic"
+            - name: ELASTICSEARCH_PASSWORD
+              {{- if .Values.elasticsearch.secretName }}
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.elasticsearch.secretName | quote }}, "key":"ELASTIC_PASSWORD"}}
+              {{- else }}
+              value: "Aa123456"
+              {{- end }}

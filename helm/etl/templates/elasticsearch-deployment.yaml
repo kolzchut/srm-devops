@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.elasticsearch.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.elasticsearch.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.elasticsearch.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: elasticsearch
+          image: {{ .Values.elasticsearch.image | quote }}
+          resources: {{ toYaml .Values.elasticsearch.resources | nindent 12 }}
+          env:
+            - name: discovery.type
+              value: single-node
+            - name: xpack.security.enabled
+              value: "true"
+            - name: ELASTIC_PASSWORD
+              {{- if .Values.elasticsearch.secretName }}
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.elasticsearch.secretName | quote }}, "key":"ELASTIC_PASSWORD"}}
+              {{- else }}
+              value: "Aa123456"
+              {{- end }}
+            - name: ES_JAVA_OPTS
+              value: {{ .Values.elasticsearch.ES_JAVA_OPTS | quote }}
+          volumeMounts:
+            - name: data
+              mountPath: /usr/share/elasticsearch/data
+              subPath: elasticsearch_data
+      volumes:
+        - name: data
+          {{- if and .Values.nfsServer .Values.elasticsearch.nfsPath }}
+          nfs:
+            server: {{ .Values.nfsServer | quote }}
+            path: {{ .Values.elasticsearch.nfsPath | quote }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

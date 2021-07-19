@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.db.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.db.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.db.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: db
+          image: {{ .Values.db.image | quote }}
+          resources: {{ toYaml .Values.db.resources | nindent 12 }}
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+              subPath: db_data
+      volumes:
+        - name: data
+          {{- if and .Values.nfsServer .Values.db.nfsPath }}
+          nfs:
+            server: {{ .Values.nfsServer | quote }}
+            path: {{ .Values.db.nfsPath | quote }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.api.name | quote }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Values.api.name | quote }}
+  replicas: 1
+  revisionHistoryLimit: 5
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.api.name | quote }}
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+        - name: api
+          image: {{ .Values.api.image | quote }}
+          resources: {{ toYaml .Values.api.resources | nindent 12 }}
+          env:
+            - name: DATABASE_READONLY_URL
+              value: "postgresql://readonly:readonly@db/datasets"
+            - name: ES_INDEX_NAME
+              value: {{ .Values.api.ES_INDEX_NAME | quote }}
+            - name: ES_DATAPACKAGE
+              value: {{ .Values.api.ES_DATAPACKAGE | quote }}
+            - name: ES_HOST
+              value: {{ .Values.elasticsearch.name | quote }}
+            - name: ES_PORT
+              value: "9200"
+            - name: ES_HTTP_AUTH
+              {{- if .Values.elasticsearch.secretName }}
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.elasticsearch.secretName | quote }}, "key":"ES_HTTP_AUTH"}}
+              {{- else }}
+              value: "elastic:Aa123456"
+              {{- end }}
