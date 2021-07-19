@@ -1,4 +1,0 @@
-api:
-  name: api
-  image: nginx
-  resources: {}

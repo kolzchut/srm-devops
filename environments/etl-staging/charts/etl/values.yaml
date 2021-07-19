@@ -1,0 +1,69 @@
+nfsServer: "172.16.0.9"
+
+db:
+  resources: {"requests": {"cpu": "25m", "memory": "512Mi"}, "limits": {"memory": "1Gi"}}
+  nfsPath: "/srm/etl-staging/db"
+
+elasticsearch:
+  resources: {"requests": {"cpu": "25m", "memory": "1Gi"}, "limits": {"memory": "2Gi"}}
+  nfsPath: "/srm/etl-staging/elasticsearch"
+  secretName: "elasticsearch"
+  ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+
+kibana:
+  resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
+
+api:
+  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
+  ES_INDEX_NAME: "srm"
+  ES_DATAPACKAGE: "https://next.obudget.org/datapackages/budgetkey/gov_decisions/datapackage.json"
+
+minio:
+  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
+
+etl:
+  resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}, "limits": {"memory": "4000Mi"}}
+  EXTERNAL_ADDRESS: "https://srm-staging-etl.whiletrue.industries"
+  secretName: "etl"
+
+ingresses:
+  - name: etl
+    rules:
+      - host: srm-staging-etl.whiletrue.industries
+        serviceName: etl
+        servicePort: 5000
+  - name: api
+    rules:
+      - host: srm-staging-api.whiletrue.industries
+        serviceName: api
+        servicePort: 5000
+  - name: kibana
+    rules:
+      - host: srm-staging-kibana.whiletrue.industries
+        serviceName: kibana
+        servicePort: 5601
+  - name: elasticsearch
+    rules:
+      - host: srm-staging-elasticsearch.whiletrue.industries
+        serviceName: elasticsearch
+        servicePort: 9200
+
+vertical_pod_autoscalers:
+  - apiVersion: apps/v1
+    kind: deployment
+    name: api
+  - apiVersion: apps/v1
+    kind: deployment
+    name: db
+  - apiVersion: apps/v1
+    kind: deployment
+    name: elasticsearch
+  - apiVersion: apps/v1
+    kind: deployment
+    name: etl
+  - apiVersion: apps/v1
+    kind: deployment
+    name: kibana
+  - apiVersion: apps/v1
+    kind: deployment
+    name: minio
