@@ -15,6 +15,6 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-        - name: api
+        - name: site
           image: {{ .Values.site.image | quote }}
           resources: {{ toYaml .Values.site.resources | nindent 12 }}

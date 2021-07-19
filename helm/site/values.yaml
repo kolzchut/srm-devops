@@ -1,4 +1,4 @@
 site:
   name: site
-  image: nginx
+  image: ghcr.io/whiletrue-industries/srm-frontend:latest
   resources: {}
