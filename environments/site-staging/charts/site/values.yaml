@@ -7,8 +7,3 @@ ingresses:
       - host: srm-staging.whiletrue.industries
         serviceName: site
         servicePort: 4000
-
-vertical_pod_autoscalers:
-  - apiVersion: apps/v1
-    kind: deployment
-    name: site
