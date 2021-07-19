@@ -52,3 +52,67 @@ This script handles the following actions:
 
 * If helm chart was changed - publish it to the helm charts repo
 * If environment chart was changed - deploy it to the relevant environment
+
+## Local development / testing environment
+
+Docker Compose is used to provide a local environment for development / testing which includes all components.
+
+Pull all the latest images for the apps:
+
+```
+docker-compose pull
+```
+
+(Alternatively, check the image name in docker-compose.yaml and tag an image that you built with that image name.)
+
+### srm-api
+
+```
+docker-compose up -d srm-api kibana
+```
+
+Wait a few seconds for all services to start
+
+* Make a request to Elasticsearch: `curl http://elastic:Aa123456@localhost:9200`
+* Log-in to Kibana at http://localhost:5601 with username `elastic` password `Aa123456`
+* Access PostgreSQL: `PGPASSWORD=postgres psql -h localhost -U postgres`
+* Make a request to SRM API: `curl http://localhost:5000/api/idx/get/foo` (should get a 404 error)
+
+### srm-etl
+
+Create .env file
+
+```
+bin/generate_key_pair.sh > .env
+```
+
+Generate Google OAuth credentials - https://console.developers.google.com/apis/credentials
+
+```
+echo GOOGLE_KEY=XXXX >> .env
+echo GOOGLE_SECRET=YYYY >> .env
+```
+
+Start srm-etl
+
+```
+docker-compose up -d srm-etl
+```
+
+Wait a few seconds, then login at http://localhost:15000 (you will be denied)
+
+Set the user as an admin user:
+
+```
+docker-compose exec srm-etl bash -c "python mk_admin.py"
+```
+
+* Login with that user at http://localhost:15000
+
+### srm-frontend
+
+```
+docker-compose up -d srm-frontend
+```
+
+* Access the frontend at http://localhost:4000

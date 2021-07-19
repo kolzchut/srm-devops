@@ -1,0 +1,100 @@
+version: '3.4'
+
+services:
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3@sha256:930cdb7e960c842f89b063226bdb9374cb3a080372564b36a1c66931d4d80e09
+    restart: on-failure
+    ports:
+      - "9200:9200"
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "true"
+      ELASTIC_PASSWORD: "Aa123456"
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    volumes:
+      - "elasticsearch:/usr/share/elasticsearch/data"
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.13.3@sha256:4aef97e6d0ac46eec716337bff18ba4a7b4e101680039588b5729fc3f90bf730
+    restart: on-failure
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_HOSTS: "http://elasticsearch:9200"
+      ELASTICSEARCH_USERNAME: elastic
+      ELASTICSEARCH_PASSWORD: "Aa123456"
+    depends_on:
+      - elasticsearch
+
+  db:
+    image: ghcr.io/whiletrue-industries/srm-etl-db:623eb6ac56d5762b8d73acf6958946906378f429@sha256:2a448564a3d1c05f471fcb92f9489ac4cd6f8e9d77a0578265b99c4731d81603
+    restart: on-failure
+    ports:
+      - "5432:5432"
+    volumes:
+      - "db:/var/lib/postgresql/data"
+
+  srm-api:
+    image: ghcr.io/whiletrue-industries/srm-api:latest
+    restart: on-failure
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_READONLY_URL: "postgresql://readonly:readonly@db/datasets"
+      ES_INDEX_NAME: "srm"
+      ES_DATAPACKAGE: "https://next.obudget.org/datapackages/budgetkey/gov_decisions/datapackage.json"
+      ES_HOST: "elasticsearch"
+      ES_PORT: "9200"
+      ES_HTTP_AUTH: "elastic:Aa123456"
+    depends_on:
+      - elasticsearch
+      - db
+
+  srm-etl-minio:
+    image: minio/minio:edge@sha256:78b6513160ee72794698b808afbeff67b44b510d6d024e0728adc57d726b6c8b
+    command:
+      - server
+      - /data
+    environment:
+      MINIO_ACCESS_KEY: access_key
+      MINIO_SECRET_KEY: secret_key
+      MINIO_REGION_NAME: us-east-1
+    volumes:
+      - "srmetlminio:/data"
+
+  srm-etl:
+    image: ghcr.io/whiletrue-industries/srm-etl:latest
+    restart: on-failure
+    ports:
+      - "15000:5000"
+    environment:
+      EXTERNAL_ADDRESS: http://localhost:15000
+      BUCKET_NAME: dgp-app
+      AWS_ACCESS_KEY_ID: access_key
+      AWS_SECRET_ACCESS_KEY: secret_key
+      S3_ENDPOINT_URL: http://minio:9000
+      GOOGLE_KEY: "${GOOGLE_KEY}"
+      GOOGLE_SECRET: "${GOOGLE_SECRET}"
+      DATABASE_URL: postgresql://postgres:postgres@db/auth
+      DATASETS_DATABASE_URL: postgresql://postgres:postgres@db/datasets
+      AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql://postgres:postgres@db/airflow
+      ETLS_DATABASE_URL: postgresql://postgres:postgres@db/etls
+      AWS_REGION: us-east-1
+      SENDGRID_API_KEY: ""
+      PUBLIC_KEY_B64: "${PUBLIC_KEY_B64}"
+      PRIVATE_KEY_B64: "${PRIVATE_KEY_B64}"
+    depends_on:
+      - db
+      - srm-etl-minio
+
+  srm-frontend:
+    image: ghcr.io/whiletrue-industries/srm-frontend:latest
+    restart: on-failure
+    ports:
+      - "4000:4000"
+
+volumes:
+  elasticsearch:
+  db:
+  srmetlminio:
