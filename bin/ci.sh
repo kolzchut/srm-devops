@@ -56,7 +56,10 @@ for ENVIRONMENT_NAME in `ls environments/`; do
       if [ -d "${ENVIRONMENT_CHART_DIR}" ]; then
         [ -f "${ENVIRONMENT_CHART_DIR}/chart_name.txt" ] && ENVIRONMENT_CHART_NAME="$(cat ${ENVIRONMENT_CHART_DIR}/chart_name.txt)"
         ENVIRONMENT_CHART_HAS_CHANGES=no
-        if echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_CHART_DIR}/"; then
+        if echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_DIR}/environment_label.txt"; then
+          echo Detected change in environment label
+          ENVIRONMENT_CHART_HAS_CHANGES=yes
+        elif echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_CHART_DIR}/"; then
           echo Detected change in environment chart dir
           ENVIRONMENT_CHART_HAS_CHANGES=yes
         elif ! [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ] && echo "${GIT_DIFF}" | grep "^helm/${ENVIRONMENT_CHART_NAME}/latest-chart-version.txt"; then
