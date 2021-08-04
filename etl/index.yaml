@@ -2,17 +2,24 @@ apiVersion: v1
 entries:
   etl:
   - apiVersion: v2
-    created: "2021-07-19T18:21:05.597790475Z"
+    created: "2021-08-04T16:04:31.256479459Z"
+    digest: ef3b87c61844255fee17b4a6a123054478d98c20b8c5afd26743bb3c6f0e90c1
+    name: etl
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/etl/etl-v0.0.0-f86a5a44ca31c3d9e9f352ee7954e1e8a2e60520.tgz
+    version: v0.0.0-f86a5a44ca31c3d9e9f352ee7954e1e8a2e60520
+  - apiVersion: v2
+    created: "2021-08-04T16:04:31.256042474Z"
     digest: e795947a880b91c8d55dbc62d65636e3beebd0d972b35e6fa1f523c016e242c6
     name: etl
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/etl/etl-v0.0.0-ac27a690c7a616bc99f6aa557bdd9af8aed1d25e.tgz
     version: v0.0.0-ac27a690c7a616bc99f6aa557bdd9af8aed1d25e
   - apiVersion: v2
-    created: "2021-07-19T18:21:05.597602872Z"
+    created: "2021-08-04T16:04:31.255798783Z"
     digest: 6863e5ed649d83dc667117a2904cd9fcd4dcd208f5ded62c31d21a97393a73ed
     name: etl
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/etl/etl-v0.0.0-5fcc6e4dad4186335532842b25a273f148d3f6e4.tgz
     version: v0.0.0-5fcc6e4dad4186335532842b25a273f148d3f6e4
-generated: "2021-07-19T18:21:05.596851961Z"
+generated: "2021-08-04T16:04:31.254779919Z"
