@@ -62,12 +62,12 @@ spec:
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/datasets"
             - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/airflow"
+            - name: DATAFLOWS_AIRTABLE_APIKEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"DATAFLOWS_AIRTABLE_APIKEY"}}
             - name: ETLS_DATABASE_URL
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/etls"
             - name: ETL_GOOGLE_MAPS_API_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOOGLE_MAPS_API_KEY"}}
-            - name: ETL_DATAFLOWS_AIRTABLE_APIKEY
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_DATAFLOWS_AIRTABLE_APIKEY"}}
             - name: ETL_CLICK_API
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_CLICK_API"}}
             - name: ETL_GUIDESTAR_USERNAME
