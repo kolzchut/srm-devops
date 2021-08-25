@@ -68,41 +68,13 @@ spec:
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/etls"
             - name: ETL_GOOGLE_MAPS_API_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOOGLE_MAPS_API_KEY"}}
-            - name: ETL_CLICK_API
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_CLICK_API"}}
             - name: ETL_GUIDESTAR_USERNAME
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GUIDESTAR_USERNAME"}}
             - name: ETL_GUIDESTAR_PASSWORD
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GUIDESTAR_PASSWORD"}}
-            - name: ETL_GUIDESTAR_API
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GUIDESTAR_API"}}
             - name: ETL_GOVMAP_API_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOVMAP_API_KEY"}}
-            - name: ETL_GOVMAP_AUTH
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOVMAP_AUTH"}}
-            - name: ETL_GOVMAP_REQUEST_ORIGIN
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOVMAP_REQUEST_ORIGIN"}}
-            - name: ETL_GOVMAP_GEOCODE_API
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOVMAP_GEOCODE_API"}}
             - name: ETL_AIRTABLE_BASE
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_BASE"}}
-            - name: ETL_AIRTABLE_VIEW
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_VIEW"}}
-            - name: ETL_AIRTABLE_LOCATION_TABLE
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_LOCATION_TABLE"}}
-            - name: ETL_AIRTABLE_ORGANIZATION_TABLE
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_ORGANIZATION_TABLE"}}
-            - name: ETL_AIRTABLE_BRANCH_TABLE
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_BRANCH_TABLE"}}
-            - name: ETL_AIRTABLE_SITUATION_TABLE
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_SITUATION_TABLE"}}
             - name: ETL_MAPBOX_ACCESS_TOKEN
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_ACCESS_TOKEN"}}
-            - name: ETL_MAPBOX_LIST_TILESETS
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_LIST_TILESETS"}}
-            - name: ETL_MAPBOX_UPLOAD_CREDENTIALS
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_UPLOAD_CREDENTIALS"}}
-            - name: ETL_MAPBOX_CREATE_UPLOAD
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_CREATE_UPLOAD"}}
-            - name: ETL_MAPBOX_UPLOAD_STATUS
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_UPLOAD_STATUS"}}
