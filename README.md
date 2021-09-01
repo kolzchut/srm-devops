@@ -86,6 +86,12 @@ Create .env file
 bin/generate_key_pair.sh > .env
 ```
 
+Add environment variables for the ETL server (empty secrets will need to be updated with real values):
+
+```
+cat .etl.env >> .env
+```
+
 Generate Google OAuth credentials - https://console.developers.google.com/apis/credentials
 
 ```

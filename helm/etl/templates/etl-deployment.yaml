@@ -62,17 +62,19 @@ spec:
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/datasets"
             - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/airflow"
-            - name: ETLS_DATABASE_URL
-              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/etls"
-            - name: GUIDESTAR_PASSWORD
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GUIDESTAR_PASSWORD"}}
-            - name: GUIDESTAR_USERNAME
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GUIDESTAR_USERNAME"}}
             - name: DATAFLOWS_AIRTABLE_APIKEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"DATAFLOWS_AIRTABLE_APIKEY"}}
-            - name: GOOGLE_API_KEY
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOOGLE_API_KEY"}}
-            - name: GOVMAP_API_KEY
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOVMAP_API_KEY"}}
-            - name: MAPBOX_ACCESS_TOKEN
-              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"MAPBOX_ACCESS_TOKEN"}}
+            - name: ETLS_DATABASE_URL
+              value: "postgresql://postgres:postgres@{{ .Values.db.name }}/etls"
+            - name: ETL_GOOGLE_MAPS_API_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOOGLE_MAPS_API_KEY"}}
+            - name: ETL_GUIDESTAR_USERNAME
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GUIDESTAR_USERNAME"}}
+            - name: ETL_GUIDESTAR_PASSWORD
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GUIDESTAR_PASSWORD"}}
+            - name: ETL_GOVMAP_API_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_GOVMAP_API_KEY"}}
+            - name: ETL_AIRTABLE_BASE
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_BASE"}}
+            - name: ETL_MAPBOX_ACCESS_TOKEN
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_ACCESS_TOKEN"}}
