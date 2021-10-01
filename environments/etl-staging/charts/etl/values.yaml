@@ -20,6 +20,7 @@ api:
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
+  nfsPath: "/srm/etl-staging/minio"
 
 etl:
   resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}, "limits": {"memory": "4000Mi"}}

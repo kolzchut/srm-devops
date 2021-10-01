@@ -35,5 +35,11 @@ spec:
               subPath: minio_data
       volumes:
         - name: data
+          {{- if and .Values.nfsServer .Values.minio.nfsPath }}
+          nfs:
+            server: {{ .Values.nfsServer | quote }}
+            path: {{ .Values.minio.nfsPath | quote }}
+          {{- else }}
           emptyDir: {}
+          {{- end }}
 {{ end }}
