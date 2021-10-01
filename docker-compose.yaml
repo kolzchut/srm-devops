@@ -80,6 +80,10 @@ services:
       DATASETS_DATABASE_URL: postgresql://postgres:postgres@db/datasets
       AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql://postgres:postgres@db/airflow
       ETLS_DATABASE_URL: postgresql://postgres:postgres@db/etls
+      ES_HOST: "elasticsearch"
+      ES_PORT: "9200"
+      ES_HTTP_AUTH: "elastic:Aa123456"
+      ES_INDEX_NAME: "srm"
       AWS_REGION: us-east-1
       SENDGRID_API_KEY: ""
       PUBLIC_KEY_B64: "${PUBLIC_KEY_B64}"
