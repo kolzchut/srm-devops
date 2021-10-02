@@ -78,3 +78,17 @@ spec:
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_BASE"}}
             - name: ETL_MAPBOX_ACCESS_TOKEN
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_ACCESS_TOKEN"}}
+            - name: ES_INDEX_NAME
+              value: {{ .Values.api.ES_INDEX_NAME | quote }}
+            - name: ES_DATAPACKAGE
+              value: {{ .Values.api.ES_DATAPACKAGE | quote }}
+            - name: ES_HOST
+              value: {{ .Values.elasticsearch.name | quote }}
+            - name: ES_PORT
+              value: "9200"
+            - name: ES_HTTP_AUTH
+              {{- if .Values.elasticsearch.secretName }}
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.elasticsearch.secretName | quote }}, "key":"ES_HTTP_AUTH"}}
+              {{- else }}
+              value: "elastic:Aa123456"
+              {{- end }}
