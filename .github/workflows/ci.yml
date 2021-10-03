@@ -30,6 +30,7 @@ jobs:
           --branch-name main \
           --ssh-key "${SRM_DEVOPS_DEPLOY_KEY}" \
           --path srm-devops \
+          --fetch-depth 9999 \
           --config-user-name srm-devops-ci &&\
         cd srm-devops &&\
         OVERRIDE_COMMIT_MESSAGE="${{ github.event.inputs.commit_message }}" bin/ci.sh main "${GITHUB_EVENT_BEFORE}" "${GITHUB_SHA}"
