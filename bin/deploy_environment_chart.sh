@@ -46,15 +46,26 @@ fi
 [ -f "${ENVIRONMENT_CHART_DIR}/values.auto-updated.yaml" ] && HELM_ARGS="${HELM_ARGS} -f ${ENVIRONMENT_CHART_DIR}/values.auto-updated.yaml"
 
 if [ "${FROM_PATH}" == "yes" ]; then
+  HELM_CHART_VERSION_ARGS=""
   HELM_ARGS="--install ${RELEASE_NAME} ./helm/${CHART_NAME} ${HELM_ARGS}"
 else
-  HELM_ARGS="--install ${RELEASE_NAME} --version ${CHART_VERSION} --repo https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/${CHART_NAME} ${CHART_NAME} ${HELM_ARGS}"
+  HELM_CHART_VERSION_ARGS="--version ${CHART_VERSION} --repo https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/${CHART_NAME} ${CHART_NAME}"
+  HELM_ARGS="--install ${RELEASE_NAME} ${HELM_CHART_VERSION_ARGS} ${HELM_ARGS}"
 fi
 
 echo HELM_ARGS="${HELM_ARGS}"
 
 source bin/connect_environment.sh "${ENVIRONMENT_NAME}"
-helm upgrade $HELM_ARGS
-[ "$?" != "0" ] && echo Failed && exit 1
+
+if ! helm upgrade $HELM_ARGS; then
+  if [ "${HELM_CHART_VERSION_ARGS}" != "" ] && ! helm show chart $HELM_CHART_VERSION_ARGS; then
+    echo requested chart is not available, waiting 2 minutes and retrying in case it was just published
+    sleep 120
+    ! helm upgrade $HELM_ARGS && echo helm upgrade failed && exit 1
+  else
+    echo helm upgrade failed && exit 1
+  fi
+fi
+
 echo Great Success
 exit 0
