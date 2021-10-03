@@ -3,6 +3,13 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+    inputs:
+      commit_message:
+        description: |
+          Commit message to run with. See README for supported arguments to control the triggered actions.
+        required: true
+        default: ''
 env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
   SRM_DEVOPS_DEPLOY_KEY: ${{ secrets.SRM_DEVOPS_DEPLOY_KEY }}
@@ -25,4 +32,4 @@ jobs:
           --path srm-devops \
           --config-user-name srm-devops-ci &&\
         cd srm-devops &&\
-        bin/ci.sh main "${GITHUB_EVENT_BEFORE}" "${GITHUB_SHA}"
+        OVERRIDE_COMMIT_MESSAGE="${{ github.event.inputs.commit_message }}" bin/ci.sh main "${GITHUB_EVENT_BEFORE}" "${GITHUB_SHA}"

@@ -53,6 +53,16 @@ This script handles the following actions:
 * If helm chart was changed - publish it to the helm charts repo
 * If environment chart was changed - deploy it to the relevant environment
 
+The CI script checks changed files to determine actions to perform.
+
+To force actions regardless of changed files, add the following arguments to the commit message:
+
+* `--helm-publish-chart=CHART_NAME` - Publish helm chart
+* `--deploy-environment-chart=environments/ENVIRONMENT_NAME/charts/CHART_NAME` - Deploy an environment chart
+
+You can specify multiple arguments on the same commit message.
+The CI action also supports manual dispatch from the GitHub UI - to trigger it without a commit.
+
 ## Local development / testing environment
 
 Docker Compose is used to provide a local environment for development / testing which includes all components.

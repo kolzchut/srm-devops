@@ -19,6 +19,13 @@ echo "--- commit message ---"
 echo "${COMMIT_MSG}"
 echo "----------------------"
 
+if [ "${OVERRIDE_COMMIT_MESSAGE}" != "" ]; then
+  echo "--- override commit message ---"
+  echo "${OVERRIDE_COMMIT_MESSAGE}"
+  echo "----------------------"
+  COMMIT_MSG="${OVERRIDE_COMMIT_MESSAGE}"
+fi
+
 RET=0
 
 HELM_CHANGED_CHARTS=""
@@ -56,7 +63,10 @@ for ENVIRONMENT_NAME in `ls environments/`; do
       if [ -d "${ENVIRONMENT_CHART_DIR}" ]; then
         [ -f "${ENVIRONMENT_CHART_DIR}/chart_name.txt" ] && ENVIRONMENT_CHART_NAME="$(cat ${ENVIRONMENT_CHART_DIR}/chart_name.txt)"
         ENVIRONMENT_CHART_HAS_CHANGES=no
-        if echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_DIR}/environment_label.txt"; then
+        if echo "${COMMIT_MSG}" | grep -- "--deploy-environment-chart=${ENVIRONMENT_CHART_DIR}"; then
+          echo Detected forced update of environment chart dir from commit message
+          ENVIRONMENT_CHART_HAS_CHANGES=yes
+        elif echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_DIR}/environment_label.txt"; then
           echo Detected change in environment label
           ENVIRONMENT_CHART_HAS_CHANGES=yes
         elif echo "${GIT_DIFF}" | grep "^${ENVIRONMENT_CHART_DIR}/"; then
