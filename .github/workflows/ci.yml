@@ -7,18 +7,22 @@ env:
   GITHUB_EVENT_BEFORE: ${{ github.event.before }}
   SRM_DEVOPS_DEPLOY_KEY: ${{ secrets.SRM_DEVOPS_DEPLOY_KEY }}
   KUBECONFIG: ${{ secrets.KUBECONFIG }}
+  HELM_VERSION: "v3.7.0"
 jobs:
   main:
     runs-on: ubuntu-18.04
     steps:
     - run: |
+        curl -s https://raw.githubusercontent.com/OriHoch/uumpa-ci-toolbox/main/bin/github_actions_install.sh \
+          | bash -s 22c1970adcd72930509ff5b8eabd52124a9e6866 OriHoch/uumpa-ci-toolbox &&\
+        uci helm install --version "${HELM_VERSION}" --with-sudo &&\
         echo "${KUBECONFIG}" > .kubeconfig
         export KUBECONFIG="$(pwd)/.kubeconfig"
-        echo "${SRM_DEVOPS_DEPLOY_KEY}" > srm_devops_deploy_key
-        chmod 400 srm_devops_deploy_key
-        export GIT_SSH_COMMAND="ssh -i $(pwd)/srm_devops_deploy_key -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
-        git clone git@github.com:whiletrue-industries/srm-devops.git
-        git config --global user.name "srm-devops CI" &&\
-        git config --global user.email "srm-devops-ci@localhost" &&\
-        cd srm-devops
+        uci git checkout \
+          --github-repo-name whiletrue-industries/srm-devops \
+          --branch-name main \
+          --ssh-key "${SRM_DEVOPS_DEPLOY_KEY}" \
+          --path srm-devops \
+          --config-user-name srm-devops-ci &&\
+        cd srm-devops &&\
         bin/ci.sh main "${GITHUB_EVENT_BEFORE}" "${GITHUB_SHA}"
