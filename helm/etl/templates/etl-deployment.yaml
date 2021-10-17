@@ -95,7 +95,7 @@ spec:
             - name: CKAN_API_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"CKAN_API_KEY"}}
             - name: CKAN_HOST
-              valueFrom: {{ .Values.etl.ckanHost | quote }}
+              value: {{ .Values.etl.ckanHost | quote }}
             - name: CKAN_OWNER_ORG
               value: "muni"
 
