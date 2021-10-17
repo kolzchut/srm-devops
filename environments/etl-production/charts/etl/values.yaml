@@ -26,6 +26,7 @@ etl:
   resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}, "limits": {"memory": "4000Mi"}}
   EXTERNAL_ADDRESS: "https://srm-production-etl.whiletrue.industries"
   secretName: "etl"
+  ckanHost: "https://srm.datacity.org.il"
 
 ingresses:
   - name: etl
