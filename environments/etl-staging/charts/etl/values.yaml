@@ -16,7 +16,7 @@ kibana:
 api:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
   ES_INDEX_NAME: "srm"
-  ES_DATAPACKAGE: "https://srm-staging.datacity.org.il/dataset/2cb5b186-3d0e-4076-a7a1-a00e62bbb03f/resource/aa9c9790-5ab5-4b38-b722-a077623abcc1/download/datapackage.json"
+  ES_DATAPACKAGE: "https://srm-staging.datacity.org.il/dataset/d3e2603d-fd87-42a9-ab5b-ff15e22013f8/resource/63f25a1e-badc-4504-8072-0a642d62a664/download/datapackage.json"
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
