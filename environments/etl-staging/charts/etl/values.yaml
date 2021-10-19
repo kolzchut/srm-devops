@@ -19,6 +19,7 @@ api:
   ES_DATAPACKAGE: |
     https://srm-staging.datacity.org.il/dataset/d3e2603d-fd87-42a9-ab5b-ff15e22013f8/resource/48aba26d-eef2-4720-a2d2-c26d8377a8cb/download/datapackage.json
     https://srm-staging.datacity.org.il/dataset/0386f511-bd1b-4931-8c3c-88c45272f642/resource/964e3928-c8c1-4460-a5c2-0f46f18c7ab5/download/datapackage.json
+    https://srm-staging.datacity.org.il/dataset/71a7e998-4984-472a-9e96-66890bbef5f5/resource/680bd503-7e7b-4674-878b-4635690bb099/download/datapackage.json
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
