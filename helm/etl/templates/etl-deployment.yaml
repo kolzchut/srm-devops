@@ -46,6 +46,8 @@ spec:
             - name: AWS_REGION
               value: "us-east-1"
             {{- end }}
+            - name: AIRFLOW__CORE__PARALLELISM
+              value: "1"
             - name: GOOGLE_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOOGLE_KEY"}}
             - name: GOOGLE_SECRET
