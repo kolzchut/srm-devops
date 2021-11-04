@@ -1,4 +1,4 @@
 api:
   image: ghcr.io/whiletrue-industries/srm-api:53aff41639f4b479dbaf8fc1a25340cc672899fb
 etl:
-  image: ghcr.io/whiletrue-industries/srm-etl:015f67c933e1e54ba5d582beb493581aff8d6847
+  image: ghcr.io/whiletrue-industries/srm-etl:5dc6fc66d4fdd2c7b017c2099b07168a8cfe6554
