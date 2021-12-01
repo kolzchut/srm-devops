@@ -100,4 +100,6 @@ spec:
               value: {{ .Values.etl.ckanHost | quote }}
             - name: CKAN_OWNER_ORG
               value: "muni"
+            - name: ENV_NAME
+              value: {{ .Values.etl.envName | quote }}
 

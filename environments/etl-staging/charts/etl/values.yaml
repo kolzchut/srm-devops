@@ -32,6 +32,7 @@ etl:
   EXTERNAL_ADDRESS: "https://srm-staging-etl.whiletrue.industries"
   secretName: "etl"
   ckanHost: "https://srm-staging.datacity.org.il"
+  envName: "staging"
 
 ingresses:
   - name: etl
