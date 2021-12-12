@@ -16,7 +16,12 @@ kibana:
 api:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
   ES_INDEX_NAME: "srm"
-  ES_DATAPACKAGE: "https://next.obudget.org/datapackages/budgetkey/gov_decisions/datapackage.json"
+  ES_DATAPACKAGE: |
+    https://srm.datacity.org.il/dataset/5423f041-47f3-4325-a116-8ae56c317d79/resource/d4dcb112-fcc9-4ea7-988d-e0819c4c79c3/download/datapackage.json
+    https://srm.datacity.org.il/dataset/20a9ee57-1f33-4fc2-b620-875b27af27d4/resource/19e4cbb2-7383-4dc7-8c59-6711069ebcec/download/datapackage.json
+    https://srm.datacity.org.il/dataset/812345ae-521e-4171-9a91-d66d0fcf03df/resource/c23e5c4f-078d-45b9-bc9c-356ed87c4028/download/datapackage.json
+    https://srm.datacity.org.il/dataset/60337369-3d2c-49ba-beba-9f43abbd8f67/resource/0b46ddcd-ef4f-46c9-a9f8-257c0dd18260/download/datapackage.json
+    https://srm.datacity.org.il/dataset/c5dd1e15-4be8-4eb8-b54e-28cab16fcd5e/resource/15112d71-3a67-42cb-bbbd-6fb316173e3b/download/datapackage.json
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
@@ -26,6 +31,8 @@ etl:
   resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}, "limits": {"memory": "4000Mi"}}
   EXTERNAL_ADDRESS: "https://srm-production-etl.whiletrue.industries"
   secretName: "etl"
+  ckanHost: "https://srm.datacity.org.il"
+  envName: "production"
 
 ingresses:
   - name: etl

@@ -46,6 +46,8 @@ spec:
             - name: AWS_REGION
               value: "us-east-1"
             {{- end }}
+            - name: AIRFLOW__CORE__PARALLELISM
+              value: "1"
             - name: GOOGLE_KEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"GOOGLE_KEY"}}
             - name: GOOGLE_SECRET
@@ -92,3 +94,12 @@ spec:
               {{- else }}
               value: "elastic:Aa123456"
               {{- end }}
+            - name: CKAN_API_KEY
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"CKAN_API_KEY"}}
+            - name: CKAN_HOST
+              value: {{ .Values.etl.ckanHost | quote }}
+            - name: CKAN_OWNER_ORG
+              value: "muni"
+            - name: ENV_NAME
+              value: {{ .Values.etl.envName | quote }}
+

@@ -4,6 +4,11 @@ site:
 ingresses:
   - name: site
     rules:
-      - host: srm-production.whiletrue.industries
+      - host: kolsherut.org.il
+        serviceName: site
+        servicePort: 4000
+  - name: site-www
+    rules:
+      - host: www.kolsherut.org.il
         serviceName: site
         servicePort: 4000
