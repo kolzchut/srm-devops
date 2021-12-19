@@ -47,3 +47,12 @@ kubectl create secret generic etl-s3 \
 ```
 
 Set the secret name in values `etl.secretName`
+
+#### DB Backup
+
+```
+kubectl create secret generic db-backup \
+    --from-literal=DB_BACKUP_BUCKET= \
+    --from-literal=DB_BACKUP_AWS_ACCESS_KEY_ID= \
+    --from-literal=DB_BACKUP_AWS_SECRET_ACCESS_KEY=
+```
