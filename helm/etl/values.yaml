@@ -17,11 +17,12 @@ db:
 
 elasticsearch:
   name: elasticsearch
-  image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3@sha256:930cdb7e960c842f89b063226bdb9374cb3a080372564b36a1c66931d4d80e09
+  image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:617261835d33baae54e244fedc8ef89f7a90a7dd@sha256:b8abc23ee75eb39aa831f3ca55f2d8db7dafb57500909cb817745a7e13a38666
   resources: {}
   # nfsPath: ""
   # secretName: "elasticsearch"
   ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+  enableBackups: false
 
 kibana:
   name: kibana
