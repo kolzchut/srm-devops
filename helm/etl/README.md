@@ -56,3 +56,29 @@ kubectl create secret generic db-backup \
     --from-literal=DB_BACKUP_AWS_ACCESS_KEY_ID= \
     --from-literal=DB_BACKUP_AWS_SECRET_ACCESS_KEY=
 ```
+
+#### Elasticsearch Backup
+
+```
+kubectl create secret generic elasticsearch-backup \
+    --from-literal=S3_CLIENT_DEFAULT_ACCESS_KEY= \
+    --from-literal=S3_CLIENT_DEFAULT_SECRET_KEY=
+```
+
+### Post-deploy tasks
+
+#### Setup Elasticsearch scheduled backups
+
+* Log-in to Kibana > Stack Management > Snapshot and Restore
+* Register a repository:
+  * name: `kolzchut-backups`
+  * type: AWS S3
+  * bucket: name of the bucket
+  * base path: `srm-etl-elasticsearch`
+* Click on verify repository to verify the connection to S3
+* Create a policy:
+  * name: `weekly-snapshots`
+  * snapshot name: `weekly-snapshot`
+  * repository: `kolzchut-backups`
+  * schedule: every week, on sunday
+* click on "run now" to test it and make sure the snapshot is created

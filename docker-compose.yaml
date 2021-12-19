@@ -3,7 +3,7 @@ version: '3.4'
 services:
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.3@sha256:930cdb7e960c842f89b063226bdb9374cb3a080372564b36a1c66931d4d80e09
+    image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:617261835d33baae54e244fedc8ef89f7a90a7dd@sha256:b8abc23ee75eb39aa831f3ca55f2d8db7dafb57500909cb817745a7e13a38666
     restart: on-failure
     ports:
       - "9200:9200"
@@ -12,6 +12,9 @@ services:
       xpack.security.enabled: "true"
       ELASTIC_PASSWORD: "Aa123456"
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+      # to allow setting up backups using snapshots, set the following in .env file
+      S3_CLIENT_DEFAULT_ACCESS_KEY: "${S3_CLIENT_DEFAULT_ACCESS_KEY}"
+      S3_CLIENT_DEFAULT_SECRET_KEY: "${S3_CLIENT_DEFAULT_SECRET_KEY}"
     volumes:
       - "elasticsearch:/usr/share/elasticsearch/data"
 

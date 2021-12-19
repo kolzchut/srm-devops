@@ -11,6 +11,7 @@ elasticsearch:
   nfsPath: "/srm/etl-production/elasticsearch"
   secretName: "elasticsearch"
   ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+  enableBackups: true
 
 kibana:
   resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
