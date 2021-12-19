@@ -35,6 +35,19 @@ services:
     volumes:
       - "db:/var/lib/postgresql/data"
 
+  db-backup:
+    image: ghcr.io/whiletrue-industries/srm-etl-db:74f986e282fff4f39c831c22322c2b028be4f350@sha256:bf8ebbd5466d46557d8aba0468cc7f7f31d9fdd3a834f1add3a266fbe1960c8d
+    command: ["/srv/backup.sh"]
+    restart: "no"
+    environment:
+      DB_BACKUP_HOST: db
+      # following env var values should be set in .env file
+      DB_BACKUP_BUCKET: "${DB_BACKUP_BUCKET}"
+      DB_BACKUP_AWS_ACCESS_KEY_ID: "${DB_BACKUP_AWS_ACCESS_KEY_ID}"
+      DB_BACKUP_AWS_SECRET_ACCESS_KEY: "${DB_BACKUP_AWS_SECRET_ACCESS_KEY}"
+    depends_on:
+      - db
+
   srm-api:
     image: ghcr.io/whiletrue-industries/srm-api:latest
     restart: on-failure

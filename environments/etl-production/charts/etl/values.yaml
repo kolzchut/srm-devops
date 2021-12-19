@@ -3,6 +3,8 @@ nfsServer: "172.16.0.9"
 db:
   resources: {"requests": {"cpu": "25m", "memory": "512Mi"}, "limits": {"memory": "1Gi"}}
   nfsPath: "/srm/etl-production/db"
+  backup:
+    enabled: true
 
 elasticsearch:
   resources: {"requests": {"cpu": "25m", "memory": "1Gi"}, "limits": {"memory": "2Gi"}}

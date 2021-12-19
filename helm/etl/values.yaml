@@ -5,6 +5,15 @@ db:
   image: ghcr.io/whiletrue-industries/srm-etl-db:623eb6ac56d5762b8d73acf6958946906378f429@sha256:2a448564a3d1c05f471fcb92f9489ac4cd6f8e9d77a0578265b99c4731d81603
   resources: {}
   # nfsPath: ""
+  backup:
+    enabled: false
+    name: db-backup
+    image: ghcr.io/whiletrue-industries/srm-etl-db:74f986e282fff4f39c831c22322c2b028be4f350@sha256:bf8ebbd5466d46557d8aba0468cc7f7f31d9fdd3a834f1add3a266fbe1960c8d
+    # every Sunday 2:53
+    schedule: "53 2 * * 0"
+    resources:
+      requests: {"cpu": "25m",  "memory": "200Mi"}
+      limits: {"cpu": "165m", "memory": "400Mi"}
 
 elasticsearch:
   name: elasticsearch

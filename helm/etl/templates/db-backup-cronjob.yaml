@@ -1,0 +1,26 @@
+{{ if .Values.db.backup.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.db.backup.name | quote }}
+spec:
+  schedule: {{ .Values.db.backup.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup
+            image: {{ .Values.db.backup.image }}
+            command: ["/srv/backup.sh"]
+            resources: {{ toYaml .Values.db.backup.resources | nindent 14 }}
+            env:
+              - name: DB_BACKUP_HOST
+                value: db
+            envFrom:
+              - secretRef: {"name": "db-backup"}
+{{ end }}

@@ -132,3 +132,19 @@ docker-compose up -d srm-frontend
 ```
 
 * Access the frontend at http://localhost:4000
+
+### db backup
+
+Set the following AWS S3 configuration in `.env` file:
+
+```
+DB_BACKUP_BUCKET=
+DB_BACKUP_AWS_ACCESS_KEY_ID=
+DB_BACKUP_AWS_SECRET_ACCESS_KEY=
+```
+
+Create a DB backup:
+
+```
+docker-compose run db-backup
+```
