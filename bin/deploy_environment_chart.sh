@@ -23,7 +23,7 @@ if [ -f "${ENVIRONMENT_CHART_DIR}/chart_version.txt" ]; then
   CHART_VERSION="$(cat "${ENVIRONMENT_CHART_DIR}/chart_version.txt")"
 elif [ -f "helm/${CHART_NAME}/latest-chart-version.txt" ]; then
   CHART_VERSION="$(cat "helm/${CHART_NAME}/latest-chart-version.txt")"
-else
+elif [ "${FROM_PATH}" != "yes" ]; then
   echo failed to find chart version
   exit 1
 fi

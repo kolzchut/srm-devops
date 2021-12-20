@@ -1,0 +1,7 @@
+dataBackup:
+  # every Sunday 2:33
+  schedule: "33 2 * * 0"
+  image: ghcr.io/whiletrue-industries/srm-devops-aws-s3-backup-ckan-data@sha256:8092ed950e217f57d3cca453f6800f7b68a88e8011ab1d2263c1ddde23d74a34
+  resources:
+    requests: { "cpu": "25m",  "memory": "300Mi" }
+    limits: { "cpu": "165m", "memory": "600Mi" }
