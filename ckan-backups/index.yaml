@@ -1,0 +1,11 @@
+apiVersion: v1
+entries:
+  ckan-backups:
+  - apiVersion: v2
+    created: "2021-12-20T20:25:35.615726974Z"
+    digest: ba39947f0be3247e8fef4b1c70ede7adec04555f108204f876a8463b1b60d24e
+    name: ckan-backups
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-9830d8b308e2e6051abb3f20814f843a915afa5f.tgz
+    version: v0.0.0-9830d8b308e2e6051abb3f20814f843a915afa5f
+generated: "2021-12-20T20:25:35.615350246Z"
