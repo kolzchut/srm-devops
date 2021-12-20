@@ -1,0 +1,38 @@
+{{ if .Values.minio.backup.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ .Values.minio.backup.name | quote }}
+spec:
+  schedule: {{ .Values.minio.backup.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup
+            image: {{ .Values.minio.backup.image }}
+            args:
+              - "/data"
+              - {{ .Values.minio.backup.TARGET_BUCKET_PATH | quote }}
+            resources: {{ toYaml .Values.minio.backup.resources | nindent 14 }}
+            envFrom:
+              - secretRef: {"name": "minio-backup"}
+            volumeMounts:
+              - name: data
+                mountPath: /data
+                subPath: minio_data
+          volumes:
+            - name: data
+              {{- if and .Values.nfsServer .Values.minio.nfsPath }}
+              nfs:
+                server: {{ .Values.nfsServer | quote }}
+                path: {{ .Values.minio.nfsPath | quote }}
+              {{- else }}
+              emptyDir: {}
+              {{- end }}
+{{ end }}
