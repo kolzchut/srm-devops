@@ -41,6 +41,16 @@ minio:
   name: minio
   image: minio/minio:edge@sha256:78b6513160ee72794698b808afbeff67b44b510d6d024e0728adc57d726b6c8b
   resources: {}
+  backup:
+    enabled: false
+    name: minio-backup
+    image: ghcr.io/whiletrue-industries/srm-devops-aws-s3-backup@sha256:fd44f4c0540dd68d0d154e39f5b70a7ed767414943881b7bab5298656cdfd964
+    # every Sunday 2:13
+    schedule: "13 2 * * 0"
+    TARGET_BUCKET_PATH: ""
+    resources:
+      requests: { "cpu": "25m",  "memory": "200Mi" }
+      limits: { "cpu": "165m", "memory": "400Mi" }
 
 etl:
   name: etl

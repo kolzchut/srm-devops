@@ -65,6 +65,14 @@ kubectl create secret generic elasticsearch-backup \
     --from-literal=S3_CLIENT_DEFAULT_SECRET_KEY=
 ```
 
+#### Minio Backup
+
+```
+kubectl create secret generic minio-backup \
+    --from-literal=AWS_ACCESS_KEY_ID= \
+    --from-literal=AWS_SECRET_ACCESS_KEY=
+```
+
 ### Post-deploy tasks
 
 #### Setup Elasticsearch scheduled backups
