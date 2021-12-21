@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ckan-instance-backup
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ckan-instance-backup
+rules:
+- apiGroups: [""]
+  resources: [pods]
+  verbs: [list, get]
+- apiGroups: [""]
+  resources: [pods/exec]
+  verbs: [create]
+- apiGroups: ["apps"]
+  resources: [deployments]
+  verbs: [get]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: ckan-instance-backup
+subjects:
+- kind: ServiceAccount
+  name: ckan-instance-backup
+roleRef:
+  kind: Role
+  name: ckan-instance-backup
+  apiGroup: rbac.authorization.k8s.io
