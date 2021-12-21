@@ -1,0 +1,21 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ckan-db-backup
+spec:
+  schedule: {{ .Values.dbBackup.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup
+            image: {{ .Values.dbBackup.image }}
+            resources: {{ toYaml .Values.dbBackup.resources | nindent 14 }}
+            envFrom:
+              - secretRef: {"name": "srm-db-backup"}
+              - secretRef: {"name": "ckan-env-vars"}
