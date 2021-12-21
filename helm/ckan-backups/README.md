@@ -23,3 +23,14 @@ kubectl create secret generic srm-db-backup \
     --from-literal=AWS_SECRET_ACCESS_KEY \
     --from-literal=TARGET_BUCKET_PATH=
 ```
+
+### Create Instance backup secret
+
+These are the credentials for the backup target
+
+```
+kubectl create secret generic srm-instance-backup \
+    --from-literal=AWS_ACCESS_KEY_ID= \
+    --from-literal=AWS_SECRET_ACCESS_KEY \
+    --from-literal=TARGET_BUCKET_PATH=
+```

@@ -1,0 +1,24 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: ckan-instance-backup
+spec:
+  schedule: {{ .Values.instanceBackup.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          serviceAccountName: ckan-instance-backup
+          containers:
+          - name: backup
+            image: {{ .Values.instanceBackup.image }}
+            resources: {{ toYaml .Values.instanceBackup.resources | nindent 14 }}
+            env:
+              - name: CKAN_NAMESPACE
+                value: {{ .Release.Namespace | quote }}
+            envFrom:
+              - secretRef: {"name": "srm-instance-backup"}

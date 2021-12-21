@@ -13,3 +13,11 @@ dbBackup:
   resources:
     requests: { "cpu": "25m",  "memory": "300Mi" }
     limits: { "cpu": "165m", "memory": "600Mi" }
+
+instanceBackup:
+  # every Sunday 2:39
+  schedule: "39 2 * * 0"
+  image: ghcr.io/whiletrue-industries/srm-devops-aws-s3-backup-ckan-instance@sha256:20a46f6279ebdadc47e55e5cde9669f0ff3262503c3c2b45b65d08d7d81c6378
+  resources:
+    requests: { "cpu": "25m",  "memory": "300Mi" }
+    limits: { "cpu": "165m", "memory": "600Mi" }
