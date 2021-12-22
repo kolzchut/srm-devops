@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jobs
+  template:
+    metadata:
+      labels:
+        app: jobs
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/ckan-secret.yaml") . | sha256sum }}
+    spec:
+      volumes:
+        - name: ckan-secret
+          secret:
+            secretName: ckan
+      containers:
+        - name: jobs
+          image: {{ .Values.ckan.image | quote }}
+          command:
+            - ckan-paster
+            - --plugin=ckan
+            - jobs
+            - -c
+            - /etc/ckan/production.ini
+            - worker
+          resources: {{ toYaml .Values.jobs.resources | nindent 12 }}
+          volumeMounts:
+            - name: ckan-secret
+              mountPath: /etc/ckan
+      terminationGracePeriodSeconds: 30
+  revisionHistoryLimit: 2
+  progressDeadlineSeconds: 600

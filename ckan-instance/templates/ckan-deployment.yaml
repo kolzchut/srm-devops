@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ckan
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ckan
+  template:
+    metadata:
+      labels:
+        app: ckan
+      annotations:
+        checksum/configmap: {{ include (print $.Template.BasePath "/ckan-secret.yaml") . | sha256sum }}
+    spec:
+      volumes:
+        - name: ckan-secret
+          secret:
+            secretName: ckan
+      containers:
+        - name: ckan
+          image: {{ .Values.ckan.image | quote }}
+          command:
+            - bash
+            - -c
+            - |
+              echo running ckan-paster db init &&\
+              ckan-paster --plugin=ckan db init -c "${CKAN_CONFIG}/production.ini" &&\
+              echo db initialization complete
+              [ "$?" != "0" ] && echo ERROR: DB Initialization failed && exit 1
+              exec ${CKAN_VENV}/bin/gunicorn --paste ${CKAN_CONFIG}/production.ini --workers ${GUNICORN_WORKERS} --timeout ${GUNICORN_TIMEOUT}
+          ports:
+            - containerPort: 5000
+          env:
+            - name: GUNICORN_WORKERS
+              value: {{ .Values.ckan.GUNICORN_WORKERS | quote }}
+          resources: {{ toYaml .Values.ckan.resources | nindent 12 }}
+          volumeMounts:
+            - name: ckan-secret
+              mountPath: /etc/ckan
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+              scheme: HTTP
+            initialDelaySeconds: 60
+            timeoutSeconds: 10
+            periodSeconds: 300
+            successThreshold: 1
+            failureThreshold: 15
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+              scheme: HTTP
+            initialDelaySeconds: 30
+            timeoutSeconds: 10
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 15
+      terminationGracePeriodSeconds: 30
+  revisionHistoryLimit: 2
+  progressDeadlineSeconds: 600
