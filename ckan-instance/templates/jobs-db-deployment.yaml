@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jobs-db
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: jobs-db
+  template:
+    metadata:
+      labels:
+        app: jobs-db
+    spec:
+      volumes:
+        - name: data
+          emptyDir: {}
+      containers:
+        - name: jobs-db
+          image: {{ .Values.jobsDb.image | quote }}
+          ports:
+            - containerPort: 5432
+          resources: {{ toYaml .Values.jobsDb.resources | nindent 12 }}
+          env:
+            - name: POSTGRES_PASSWORD
+              value: '123456'
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+              subPath: ckan-jobs-db
+      terminationGracePeriodSeconds: 30
+  revisionHistoryLimit: 2
+  progressDeadlineSeconds: 600

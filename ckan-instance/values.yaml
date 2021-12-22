@@ -1,0 +1,53 @@
+ckan:
+  image: datacity/ckan:77f9598befecf074e2ab8921f633903ceddee24b
+  GUNICORN_WORKERS: 4
+  resources:
+    requests:
+      cpu: 100m
+      memory: 600Mi
+    limits:
+      memory: 2Gi
+
+solr:
+  image: ghcr.io/whiletrue-industries/srm-devops-ckan-solr@sha256:d08fa2edc746c90f7219cb366d8d099edcfa9bba3a52b47881b719cdc5310d15
+  resources:
+    requests:
+      cpu: 50m
+      memory: 400Mi
+    limits:
+      memory: 2Gi
+
+redis:
+  image: redis:alpine@sha256:8cf9a3e31677df091c148f2b56bcff65663b8768f95ed6a727f29b68a49fa439
+  resources:
+    requests:
+      cpu: 10m
+      memory: 100Mi
+    limits:
+      memory: 300Mi
+
+jobsDb:
+  image: postgres:12@sha256:31122316d7afefa1d99d843f3a1a09a5484304183ecff7ab943b8bb94ba44ba4
+  resources:
+    requests:
+      cpu: 20m
+      memory: 100Mi
+    limits:
+      memory: 300Mi
+
+nginx:
+  image: nginx:1.17-alpine@sha256:763e7f0188e378fef0c761854552c70bbd817555dc4de029681a2e972e25e30e
+  resources:
+    requests:
+      cpu: 20m
+      memory: 100Mi
+    limits:
+      memory: 300Mi
+
+jobs:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 600Mi
+    limits:
+      memory: 2Gi
