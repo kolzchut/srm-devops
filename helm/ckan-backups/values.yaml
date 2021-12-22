@@ -9,7 +9,7 @@ dataBackup:
 dbBackup:
   # every Sunday 2:46
   schedule: "46 2 * * 0"
-  image: ghcr.io/whiletrue-industries/srm-devops-aws-s3-backup-ckan-db@sha256:891ceb90412953f6cc9f16398d6f2785db3a59c0789cba6c495d93c4ee032715
+  image: ghcr.io/whiletrue-industries/srm-devops-aws-s3-backup-ckan-db@sha256:4051312e8fc9260ef8bad9dfe37d73036860af05396e73e9bb0654556c209067
   resources:
     requests: { "cpu": "25m",  "memory": "300Mi" }
     limits: { "cpu": "165m", "memory": "600Mi" }

@@ -13,12 +13,12 @@ NOW="$(date +%Y-%m-%dT%H-%M-%S)"
 echo NOW=$NOW
 
 cd `mktemp -d` &&\
-PGPASSWORD="${POSTGRES_PASSWORD}" pg_dump -d "${POSTGRES_DB_NAME}" -h "${POSTGRES_HOST}" -U "${POSTGRES_USER}" \
+PGPASSWORD="${POSTGRES_PASSWORD}" pg_dump --inserts -d "${POSTGRES_DB_NAME}" -h "${POSTGRES_HOST}" -U "${POSTGRES_USER}" \
   -n public -f "./main-${NOW}.sql" &&\
 gzip "./main-${NOW}.sql" &&\
 aws s3 cp "./main-${NOW}.sql.gz" s3://${TARGET_BUCKET_PATH}/ &&\
 rm -f "./main-${NOW}.sql.gz" &&\
-PGPASSWORD="${DATASTORE_POSTGRES_PASSWORD}" pg_dump -d "${DATASTORE_POSTGRES_USER}" -h "${POSTGRES_HOST}" -U "${DATASTORE_POSTGRES_USER}" \
+PGPASSWORD="${DATASTORE_POSTGRES_PASSWORD}" pg_dump --inserts -d "${DATASTORE_POSTGRES_USER}" -h "${POSTGRES_HOST}" -U "${DATASTORE_POSTGRES_USER}" \
   -n public -f "./datastore-${NOW}.sql" &&\
 gzip "./datastore-${NOW}.sql" &&\
 aws s3 cp "./datastore-${NOW}.sql.gz" s3://${TARGET_BUCKET_PATH}/ &&\
