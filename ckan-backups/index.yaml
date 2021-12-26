@@ -2,31 +2,38 @@ apiVersion: v1
 entries:
   ckan-backups:
   - apiVersion: v2
-    created: "2021-12-22T10:24:11.126619227Z"
+    created: "2021-12-26T14:33:36.884401709Z"
     digest: 1fedbf45278d3654c584c707e436b8a59c3ab6ab9901aedba56f7b51beac3ebb
     name: ckan-backups
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-f843969d811f890f8a4c3fd5a495356a1940b4dd.tgz
     version: v0.0.0-f843969d811f890f8a4c3fd5a495356a1940b4dd
   - apiVersion: v2
-    created: "2021-12-22T10:24:11.126342418Z"
+    created: "2021-12-26T14:33:36.883655989Z"
     digest: ba39947f0be3247e8fef4b1c70ede7adec04555f108204f876a8463b1b60d24e
     name: ckan-backups
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-9830d8b308e2e6051abb3f20814f843a915afa5f.tgz
     version: v0.0.0-9830d8b308e2e6051abb3f20814f843a915afa5f
   - apiVersion: v2
-    created: "2021-12-22T10:24:11.126149412Z"
+    created: "2021-12-26T14:33:36.882794749Z"
+    digest: d80e31adbc7814ace8990241b0423f4de76cb55a664fc7a0f2c4eaf6bf6b213d
+    name: ckan-backups
+    urls:
+    - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-6ead4a64a16bbe1bddae40850c2de61b729618c0.tgz
+    version: v0.0.0-6ead4a64a16bbe1bddae40850c2de61b729618c0
+  - apiVersion: v2
+    created: "2021-12-26T14:33:36.882191352Z"
     digest: 6e1ad2d48dfaa9597773d3d9421f53aeb38db80ff9e401256da2b2e207b05d17
     name: ckan-backups
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-3f9f3ba8428ebd5d67ec04da19c72f5c22c17617.tgz
     version: v0.0.0-3f9f3ba8428ebd5d67ec04da19c72f5c22c17617
   - apiVersion: v2
-    created: "2021-12-22T10:24:11.125899104Z"
+    created: "2021-12-26T14:33:36.881603256Z"
     digest: dbdacd23045f59032ef79fd625d94d03db3552f4293e528f2af8f837a9dc508e
     name: ckan-backups
     urls:
     - https://raw.githubusercontent.com/whiletrue-industries/srm-devops/helm-charts/ckan-backups/ckan-backups-v0.0.0-18399cb6b98ce8374a31426f315776659fa95d3f.tgz
     version: v0.0.0-18399cb6b98ce8374a31426f315776659fa95d3f
-generated: "2021-12-22T10:24:11.125414688Z"
+generated: "2021-12-26T14:33:36.88094775Z"
