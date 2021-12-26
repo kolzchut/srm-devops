@@ -20,6 +20,15 @@ spec:
         - name: db
           image: {{ .Values.db.image | quote }}
           resources: {{ toYaml .Values.db.resources | nindent 12 }}
+          {{ if .Values.db.restore.enabled }}
+          env:
+            - name: DB_RESTORE_AWS_ACCESS_KEY_ID
+              value: {{ .Values.db.restore.awsAccessKeyId | quote }}
+            - name: DB_RESTORE_AWS_SECRET_ACCESS_KEY
+              value: {{ .Values.db.restore.awsSecretAccessKey | quote }}
+            - name: DB_RESTORE_BUCKET_PATH_FILENAME
+              value: {{ .Values.db.restore.backupBucketPath | quote }}
+          {{ end }}
           volumeMounts:
             - name: data
               mountPath: /var/lib/postgresql/data
