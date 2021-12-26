@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: ckan-instance-backup
+  name: srm-ckan-instance-backup
 spec:
   schedule: {{ .Values.instanceBackup.schedule | quote }}
   concurrencyPolicy: Forbid
@@ -10,6 +10,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: srm-ckan-instance-backup
         spec:
           restartPolicy: OnFailure
           serviceAccountName: ckan-instance-backup

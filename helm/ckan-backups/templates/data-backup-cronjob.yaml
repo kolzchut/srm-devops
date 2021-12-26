@@ -1,7 +1,7 @@
 apiVersion: batch/v1beta1
 kind: CronJob
 metadata:
-  name: ckan-data-backup
+  name: srm-ckan-data-backup
 spec:
   schedule: {{ .Values.dataBackup.schedule | quote }}
   concurrencyPolicy: Forbid
@@ -10,6 +10,9 @@ spec:
   jobTemplate:
     spec:
       template:
+        metadata:
+          labels:
+            app: srm-ckan-data-backup
         spec:
           restartPolicy: OnFailure
           containers:
