@@ -104,6 +104,6 @@ spec:
               value: {{ .Values.etl.envName | quote }}
             - name: ETL_MAPBOX_TILESET_ID
               value: {{ .Values.etl.mapboxTilesetId | quote }}
-            - name: ETL_MABPOX_TILESET_NAME
+            - name: ETL_MAPBOX_TILESET_NAME
               value: {{ .Values.etl.mapboxTilesetName | quote }}
 
