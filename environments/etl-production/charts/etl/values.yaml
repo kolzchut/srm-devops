@@ -39,6 +39,8 @@ etl:
   secretName: "etl"
   ckanHost: "https://srm.datacity.org.il"
   envName: "production"
+  mapboxTilesetId: "srm-kolzchut.geo-data"
+  mapboxTilesetName: "SRM Geo Data"
 
 ingresses:
   - name: etl

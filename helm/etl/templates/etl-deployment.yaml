@@ -102,4 +102,8 @@ spec:
               value: "muni"
             - name: ENV_NAME
               value: {{ .Values.etl.envName | quote }}
+            - name: ETL_MAPBOX_TILESET_ID
+              value: {{ .Values.etl.mapboxTilesetId | quote }}
+            - name: ETL_MABPOX_TILESET_NAME
+              value: {{ .Values.etl.mapboxTilesetName | quote }}
 

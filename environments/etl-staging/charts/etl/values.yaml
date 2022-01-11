@@ -33,6 +33,8 @@ etl:
   secretName: "etl"
   ckanHost: "https://srm-staging.datacity.org.il"
   envName: "staging"
+  mapboxTilesetId: "srm-kolzchut-staging.geo-data"
+  mapboxTilesetName: "SRM Geo Staging Data"
 
 ingresses:
   - name: etl
