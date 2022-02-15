@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/whiletrue-industries/srm-frontend:3f7d01207bbf7522f92df2b5ac44fe626adb6a88
+  image: ghcr.io/whiletrue-industries/srm-frontend:70781ca7211ad2cd3ffeccea58e8a08326d193b9
