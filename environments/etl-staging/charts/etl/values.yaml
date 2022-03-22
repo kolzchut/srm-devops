@@ -9,6 +9,7 @@ elasticsearch:
   nfsPath: "/srm/etl-staging/elasticsearch"
   secretName: "elasticsearch"
   ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+  image: 'ghcr.io/whiletrue-industries/srm-etl-elasticsearch:3e86c3c40a8795b2049482a6afd80ec3b1092ea5'
 
 kibana:
   resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
