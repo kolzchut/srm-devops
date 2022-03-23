@@ -22,7 +22,7 @@ db:
 
 elasticsearch:
   name: elasticsearch
-  image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:617261835d33baae54e244fedc8ef89f7a90a7dd@sha256:b8abc23ee75eb39aa831f3ca55f2d8db7dafb57500909cb817745a7e13a38666
+  image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:007057b0436d1ac6a1e20453814249d6a296c1df@sha256:d8e222b8fa5ba41be99aa3c7c621c96195d7b30755c4e95b80fb1a4a11c5b7e2
   resources: {}
   # nfsPath: ""
   # secretName: "elasticsearch"
@@ -31,7 +31,7 @@ elasticsearch:
 
 kibana:
   name: kibana
-  image: docker.elastic.co/kibana/kibana:7.13.3@sha256:4aef97e6d0ac46eec716337bff18ba4a7b4e101680039588b5729fc3f90bf730
+  image: docker.elastic.co/kibana/kibana:7.13.4@sha256:17d0ec16b8fc31efcc2dff66549d3da13cded0c9be66d240d19f2515f611bf7a
   resources: {}
 
 api:
