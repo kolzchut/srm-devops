@@ -23,6 +23,7 @@ api:
     https://srm-staging.datacity.org.il/dataset/8057b3a6-3c0f-4630-b3fa-2b2a8de93d27/resource/8bed510b-4889-4792-bb9d-d6f35cf6db83/download/datapackage.json
     https://srm-staging.datacity.org.il/dataset/4faa5ef4-2d66-4e4d-8aa9-f72c53f02a2f/resource/0fbd4381-ef19-4025-80b6-069ebc6f9955/download/datapackage.json
     https://srm-staging.datacity.org.il/dataset/8057b3a6-3c0f-4630-b3fa-2b2a8de93d27/resource/8bed510b-4889-4792-bb9d-d6f35cf6db83/download/datapackage.json
+    https://srm-staging.datacity.org.il/dataset/cef289db-5053-4cb5-abcb-180a3ff8d36e/resource/9c102bae-d526-4eab-b210-e8bd3ae2d3db/download/datapackage.json
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
