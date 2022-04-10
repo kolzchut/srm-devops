@@ -4,11 +4,11 @@
 
 **You should instead follow the instructions for making changes to the code in the README**
 
-## Connecting to the environments
+## Connecting to the clusters
 
 ### Install
 
-* Install `kubectl` and `helm`
+* Install `kubectl`
 * Get the `srm-devops.kubeconfig` file
 * add `.env` file at `clusters/*/.env` with the following contents:
 ```
@@ -23,18 +23,9 @@ Connect to a cluster (CLUTER_NAME corresponds to a subdirectory under `clusters/
 source bin/connect_cluster.sh CLUSTER_NAME
 ```
 
-Connect to an environment (ENVIRONMENT_NAME corresponds to a subdirectory under `environments/`):
-
-```
-source bin/connect_environment.sh ENVIRONMENT_NAME
-```
-
 ### Deploy a chart to an environment
 
-```
-bin/deploy_environment_chart.sh environments/ENVIRONMENT_NAME/charts/CHART_NAME HELM_ARGS...
-```
+Deployment to production environments must be done via ArgoCD on Hasadna's cluster. 
+See https://github.com/hasadna/hasadna-k8s/blob/master/docs/argocd.md for details.
 
-See the README for details of the deployment logic.
-
-You can optionally deploy from the local helm chart instead of from the chart repo by setting env var `FROM_PATH=yes`
+For local development or testing clusters you can use Helm to deploy the helm charts directly.
