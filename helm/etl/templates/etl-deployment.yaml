@@ -80,6 +80,8 @@ spec:
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_BASE"}}
             - name: ETL_AIRTABLE_ALTERNATE_BASE
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_ALTERNATE_BASE"}}
+            - name: ETL_AIRTABLE_DATAENTRY_BASE
+              valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_AIRTABLE_DATAENTRY_BASE"}}
             - name: ETL_MAPBOX_ACCESS_TOKEN
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"ETL_MAPBOX_ACCESS_TOKEN"}}
             - name: ES_INDEX_NAME
