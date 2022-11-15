@@ -5,10 +5,10 @@ db:
   nfsPath: "/srm/etl-staging/db"
 
 elasticsearch:
-  resources: {"requests": {"cpu": "25m", "memory": "1Gi"}, "limits": {"memory": "2Gi"}}
+  resources: {"requests": {"cpu": "25m", "memory": "2Gi"}, "limits": {"memory": "4Gi"}}
   nfsPath: "/srm/etl-staging/elasticsearch"
   secretName: "elasticsearch"
-  ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+  ES_JAVA_OPTS: "-Xms2048m -Xmx2048m"
 
 kibana:
   resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
