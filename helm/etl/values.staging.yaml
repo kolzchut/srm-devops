@@ -14,7 +14,7 @@ kibana:
   resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
 
 api:
-  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
+  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "1Gi"}}
   ES_INDEX_NAME: "srm"
   ES_DATAPACKAGE: |
     https://srm-staging.datacity.org.il/dataset/d3e2603d-fd87-42a9-ab5b-ff15e22013f8/resource/48aba26d-eef2-4720-a2d2-c26d8377a8cb/download/datapackage.json
