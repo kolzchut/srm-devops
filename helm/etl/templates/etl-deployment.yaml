@@ -114,4 +114,8 @@ spec:
               value: {{ .Values.etl.mapboxTilesetId | quote }}
             - name: ETL_MAPBOX_TILESET_NAME
               value: {{ .Values.etl.mapboxTilesetName | quote }}
+            - name: ETL_MAPBOX_TILESET_INACCURATE_ID
+              value: {{ .Values.etl.mapboxTilesetInaccurateId | quote }}
+            - name: ETL_MAPBOX_TILESET_INACCURATE_NAME
+              value: {{ .Values.etl.mapboxTilesetInaccurateName | quote }}
 

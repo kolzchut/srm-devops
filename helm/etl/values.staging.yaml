@@ -39,6 +39,8 @@ etl:
   envName: "staging"
   mapboxTilesetId: "srm-kolzchut.geo-data-staging"
   mapboxTilesetName: "SRM Geo Staging Data"
+  mapboxTilesetInaccurateId: "srm-kolzchut.geo-data-inaccurate-staging"
+  mapboxTilesetInaccurateName: "SRM Geo Staging Data Inaccurate"
 
 ingresses:
   - name: etl

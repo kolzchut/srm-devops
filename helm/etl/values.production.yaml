@@ -43,6 +43,8 @@ etl:
   envName: "production"
   mapboxTilesetId: "srm-kolzchut.geo-data"
   mapboxTilesetName: "SRM Geo Data"
+  mapboxTilesetInaccurateId: "srm-kolzchut.geo-data-inaccurate"
+  mapboxTilesetInaccurateName: "SRM Geo Data Inaccurate"
 
 ingresses:
   - name: etl
