@@ -7,26 +7,24 @@ db:
     enabled: true
 
 elasticsearch:
-  resources: {"requests": {"cpu": "25m", "memory": "1Gi"}, "limits": {"memory": "2Gi"}}
+  resources: {"requests": {"cpu": "25m", "memory": "2Gi"}, "limits": {"memory": "4Gi"}}
   nfsPath: "/srm/etl-production/elasticsearch"
   secretName: "elasticsearch"
-  ES_JAVA_OPTS: "-Xms1024m -Xmx1024m"
+  ES_JAVA_OPTS: "-Xms2048m -Xmx2048m"
   enableBackups: true
 
 kibana:
   resources: {"requests": {"cpu": "25m", "memory": "256Mi"}, "limits": {"memory": "512Mi"}}
 
 api:
-  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
+  resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "1Gi"}}
   ES_INDEX_NAME: "srm"
   ES_DATAPACKAGE: |
     https://srm.datacity.org.il/dataset/5423f041-47f3-4325-a116-8ae56c317d79/resource/d4dcb112-fcc9-4ea7-988d-e0819c4c79c3/download/datapackage.json
-    https://srm.datacity.org.il/dataset/20a9ee57-1f33-4fc2-b620-875b27af27d4/resource/19e4cbb2-7383-4dc7-8c59-6711069ebcec/download/datapackage.json
     https://srm.datacity.org.il/dataset/812345ae-521e-4171-9a91-d66d0fcf03df/resource/c23e5c4f-078d-45b9-bc9c-356ed87c4028/download/datapackage.json
-    https://srm.datacity.org.il/dataset/60337369-3d2c-49ba-beba-9f43abbd8f67/resource/0b46ddcd-ef4f-46c9-a9f8-257c0dd18260/download/datapackage.json
     https://srm.datacity.org.il/dataset/c5dd1e15-4be8-4eb8-b54e-28cab16fcd5e/resource/15112d71-3a67-42cb-bbbd-6fb316173e3b/download/datapackage.json
-    https://srm.datacity.org.il/dataset/8aca960c-045c-447e-b823-21fbedd00651/resource/e46b3666-c1ac-4ce3-a430-f3580037fced/download/datapackage.json
-    https://srm.datacity.org.il/dataset/4396eff1-e162-4a02-84e7-ae87e09f2cd1/resource/a298c07b-114d-4fd8-bfe4-a585b584e0f7/download/datapackage.json
+    https://srm.datacity.org.il/dataset/c392c588-2443-4319-91ec-de52f9221f2a/resource/f5c0c259-6062-499f-87d5-492de079baba/download/datapackage.json
+    https://srm.datacity.org.il/dataset/6f1a45c6-c855-43c8-8a3f-acaad318581c/resource/b72bd999-4f8c-4259-b145-a4d6d843ba87/download/datapackage.json
 
 minio:
   resources: {"requests": {"cpu": "25m", "memory": "128Mi"}, "limits": {"memory": "256Mi"}}
