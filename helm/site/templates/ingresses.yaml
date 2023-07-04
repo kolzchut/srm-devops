@@ -15,6 +15,7 @@ spec:
             port:
               number: {{ .servicePort }}
         pathType: ImplementationSpecific
+        path: /(.*)
   {{ end }}
 ---
 {{ end }}
