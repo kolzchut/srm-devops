@@ -22,7 +22,7 @@ db:
 
 elasticsearch:
   name: elasticsearch
-  image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:007057b0436d1ac6a1e20453814249d6a296c1df@sha256:d8e222b8fa5ba41be99aa3c7c621c96195d7b30755c4e95b80fb1a4a11c5b7e2
+  image: ghcr.io/whiletrue-industries/srm-etl-elasticsearch:c1f1974c43f9a4113bc0c644e9e8047c5abf563a@sha256:0cca88e7ae514e170d57319e378fd03ce8c3aa063ab99593c581f0c863b1b0ff
   resources: {}
   # nfsPath: ""
   # secretName: "elasticsearch"
