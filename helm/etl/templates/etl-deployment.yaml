@@ -62,7 +62,7 @@ spec:
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/auth"
             - name: DATASETS_DATABASE_URL
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/datasets"
-            - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+            - name: AIRFLOW__DATABASE__SQL_ALCHEMY_CONN
               value: "postgresql://postgres:postgres@{{ .Values.db.name }}/airflow"
             - name: DATAFLOWS_AIRTABLE_APIKEY
               valueFrom: {"secretKeyRef":{"name":{{ .Values.etl.secretName | quote }}, "key":"DATAFLOWS_AIRTABLE_APIKEY"}}
