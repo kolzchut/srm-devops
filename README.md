@@ -11,7 +11,7 @@ with different configurations.
 Helm charts are under `helm/` directory, they are standard helm charts which can be tested locally 
 using Minikube or any other Kubernetes cluster.
 
-Changes committed to `main` branch are synced using ArgoCD to the relevant cluster/namespace as defined [here](https://github.com/hasadna/hasadna-k8s/blob/master/apps/hasadna-argocd/values-hasadna.yaml)
+Changes committed to `main` branch are synced using ArgoCD to the relevant cluster/namespace as defined [here](https://github.com/hasadna/hasadna-k8s/blob/master/apps/hasadna-argocd/templates/)
 
 Chart values are defined as helm value files inside the chart directory:
 
