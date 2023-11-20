@@ -40,9 +40,9 @@ etl:
   secretName: "etl"
   ckanHost: "https://srm.datacity.org.il"
   envName: "production"
-  mapboxTilesetId: "srm-kolzchut.geo-data"
+  mapboxTilesetId: "srm-kolzchut.point-data"
   mapboxTilesetName: "SRM Geo Data"
-  mapboxTilesetInaccurateId: "srm-kolzchut.geo-data-inaccurate"
+  mapboxTilesetInaccurateId: "srm-kolzchut.point-data-inaccurate"
   mapboxTilesetInaccurateName: "SRM Geo Data Inaccurate"
 
 ingresses:
