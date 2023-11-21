@@ -39,9 +39,9 @@ etl:
   secretName: "etl"
   ckanHost: "https://srm-staging.datacity.org.il"
   envName: "staging"
-  mapboxTilesetId: "srm-kolzchut.geo-data-staging"
+  mapboxTilesetId: "srm-kolzchut.point-data-staging"
   mapboxTilesetName: "SRM Geo Staging Data"
-  mapboxTilesetInaccurateId: "srm-kolzchut.geo-data-inaccurate-staging"
+  mapboxTilesetInaccurateId: "srm-kolzchut.point-data-inaccurate-staging"
   mapboxTilesetInaccurateName: "SRM Geo Staging Data Inaccurate"
 
 ingresses:
