@@ -34,7 +34,7 @@ minio:
   nfsPath: "/srm/etl-staging/minio"
 
 etl:
-  resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}, "limits": {"memory": "4000Mi"}}
+  resources: {"requests": {"cpu": "247m", "memory": "1953Mi"}}
   EXTERNAL_ADDRESS: "https://srm-staging-etl.whiletrue.industries"
   secretName: "etl"
   ckanHost: "https://srm-staging.datacity.org.il"
