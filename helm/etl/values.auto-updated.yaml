@@ -1,4 +1,4 @@
 api:
   image: ghcr.io/kolzchut/srm-api:8bab8743f050660c2ed98e52ed7bbf2ec29aff5c
 etl:
-  image: ghcr.io/kolzchut/srm-etl:3d59b48d06614b38c5fe597c04706513dd166ea1
+  image: ghcr.io/kolzchut/srm-etl:ce9fcfd6970adad22c26008f7f150f629550129b
