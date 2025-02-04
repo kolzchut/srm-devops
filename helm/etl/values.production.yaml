@@ -45,6 +45,9 @@ etl:
   mapboxTilesetName: "SRM Geo Data"
   mapboxTilesetInaccurateId: "srm-kolzchut.point-data-inaccurate"
   mapboxTilesetInaccurateName: "SRM Geo Data Inaccurate"
+  emailNotifierSender: "notifier.etl@gmail.com"
+  emailNotifierPassword: "wkvc dxbx uxzl ytyf"
+  emailNotifierRecipientList: "eli.rabby@kolzchut.org.il,efrat.shamir@kolzchut.org.il"
 
 ingresses:
   - name: etl

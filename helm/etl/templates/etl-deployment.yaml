@@ -116,4 +116,10 @@ spec:
               value: {{ .Values.etl.mapboxTilesetInaccurateId | quote }}
             - name: ETL_MAPBOX_TILESET_INACCURATE_NAME
               value: {{ .Values.etl.mapboxTilesetInaccurateName | quote }}
+            - name: EMAIL_NOTIFIER_SENDER_EMAIL
+              value: {{ .Values.etl.emailNotifierSender | quote }}
+            - name: EMAIL_NOTIFIER_PASSWORD
+              value: {{ .Values.etl.emailNotifierPassword | quote }}
+            - name: EMAIL_NOTIFIER_RECIPIENT_LIST
+              value: {{ .Values.etl.emailNotifierRecipientList | quote }}
 

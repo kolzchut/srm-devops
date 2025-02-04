@@ -19,6 +19,8 @@ spec:
           image: {{ .Values.api.image | quote }}
           resources: {{ toYaml .Values.api.resources | nindent 12 }}
           env:
+            - name: debug_queries
+              value: "true"
             - name: DATABASE_READONLY_URL
               value: "postgresql://readonly:readonly@db/datasets"
             - name: ES_INDEX_NAME
