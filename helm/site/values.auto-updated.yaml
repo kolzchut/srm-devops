@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/kolzchut/srm-frontend:fa77a816d5522498db6e072f0d2da5dd60541cf6
+  image: ghcr.io/kolzchut/srm-frontend:6871ada3c5a882895c5463770d847dbdbdbc4e2f
