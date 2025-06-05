@@ -5,7 +5,7 @@ db:
   nfsPath: "/srm/etl-staging/db"
 
 elasticsearch:
-  resources: {"requests": {"cpu": "25m", "memory": "2Gi"}, "limits": {"memory": "4Gi"}}
+  resources: {"requests": {"cpu": "50m", "memory": "2Gi"}, "limits": {"memory": "4Gi"}}
   nfsPath: "/srm/etl-staging/elasticsearch"
   secretName: "elasticsearch"
   ES_JAVA_OPTS: "-Xms2048m -Xmx2048m"
