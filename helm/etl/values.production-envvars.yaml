@@ -1,4 +1,4 @@
 etl:
   env:
-#    - name: FOO
-#      value: bar
+    - name: EMAIL_NOTIFIER_PASSWORD
+      value: scen tgnx csuz uqkw
