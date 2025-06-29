@@ -1,4 +1,4 @@
 etl:
   env:
-    - name: EMAIL_NOTIFIER_PASSWORD
-      value: imtc htsf jnee csnt
+    - name: example
+      value: exampleValue
