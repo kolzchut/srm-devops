@@ -1,4 +1,4 @@
 site:
   name: site
-  image: ghcr.io/whiletrue-industries/kol-sherut-fe:latest
+  image: ghcr.io/whiletrue-industries/srm-frontend:latest
   resources: {}
