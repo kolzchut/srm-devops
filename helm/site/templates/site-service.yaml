@@ -6,5 +6,5 @@ spec:
   selector:
     app: {{ .Values.site.name | quote }}
   ports:
-  - name: "80"
-    port: 80
+  - name: "4000"
+    port: 4000
