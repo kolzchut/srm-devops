@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/kolzchut/srm-frontend:v0.2.10.9-3bb9d384684d5ca48e4cb9d92221c58429a53cf3
+  image: ghcr.io/kolzchut/kol-sherut-fe:1.0.0-7383aefc6d1d3acff49f12e6a37314e2a0d00ce0
