@@ -1,4 +1,4 @@
 api:
-  image: ghcr.io/kolzchut/kol-sherut-be:1.1.3-cf6e0e76a6af18387e8854eeed4d89260eca8aee
+  image: ghcr.io/kolzchut/kol-sherut-be:1.1.4-7065b39fa8e9df9fe289465d50949a8a3ba648ce
 etl:
   image: ghcr.io/kolzchut/srm-etl:v0.2.6-91ea6986a66dd6fbc030bda467da968fe3672080
