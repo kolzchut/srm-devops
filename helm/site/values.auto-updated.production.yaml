@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/kolzchut/kol-sherut-fe:v1.6.0-e64ce7f439174fce1c3a64548134b8edf94c3e0c
+  image: ghcr.io/kolzchut/kol-sherut-fe:v1.6.1-3d55cadeb939ad2b4c224a4e5b34c022a064707f
