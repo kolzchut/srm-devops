@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/kolzchut/kol-sherut-fe:v1.11.11-auto-23d0df63de346e46d14281072437255ee4d92684
+  image: ghcr.io/kolzchut/kol-sherut-fe:v1.11.11-9397955a452ea39ceec22f54979cc77f62b97a3c
