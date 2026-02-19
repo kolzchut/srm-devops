@@ -1,2 +1,2 @@
 site:
-  image: ghcr.io/kolzchut/kol-sherut-fe:v1.11.22-74ea8bd869e055702eb01c16aeb566e942d3f602-SSG
+  image: ghcr.io/kolzchut/kol-sherut-fe:v1.11.23-auto-74ea8bd869e055702eb01c16aeb566e942d3f602
